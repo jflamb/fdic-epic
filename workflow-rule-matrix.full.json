@@ -1,0 +1,767 @@
+[
+  {
+    "source_type": "Appraiser",
+    "source_label": "Appraiser",
+    "action_label": "Submit a Concern Regarding an Appraisal I Completed For a Bank",
+    "action_code": "fidciaform",
+    "route_path": "/fdicinteragencyform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Appraiser",
+    "source_label": "Appraiser",
+    "action_label": "Submit a Concern Regarding an Appraisal Related To a Real Estate Transaction",
+    "action_code": "fidciaform",
+    "route_path": "/fdicinteragencyform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Appraiser",
+    "source_label": "Appraiser",
+    "action_label": "Submit a Concern Regarding My Changed Appraisal",
+    "action_code": "fidciaform",
+    "route_path": "/fdicinteragencyform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "AssumingIns",
+    "source_label": "Purchaser/Assuming institution of a failed bank",
+    "action_label": "Ask some other question",
+    "action_code": "requestformRR",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "AssumingIns",
+    "source_label": "Purchaser/Assuming institution of a failed bank",
+    "action_label": "Purchase FDIC Real Estate",
+    "action_code": "requestformAsset",
+    "route_path": "/requestform?sub=ORE Deed Request&type=Asset Management",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=ORE Deed Request&type=Asset Management",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "AssumingIns",
+    "source_label": "Purchaser/Assuming institution of a failed bank",
+    "action_label": "Request a Lien Release",
+    "action_code": "requestformLR",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "AssumingIns",
+    "source_label": "Purchaser/Assuming institution of a failed bank",
+    "action_label": "Request a Limited Power of Attorney or renewal",
+    "action_code": "powerofattorneyform",
+    "route_path": "/powerofattorneyform",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/powerofattorneyform",
+    "route_family": "internal-route"
+  },
+  {
+    "source_type": "AssumingIns",
+    "source_label": "Purchaser/Assuming institution of a failed bank",
+    "action_label": "Request a Quitclaim Deed or a Deed Without Warranty",
+    "action_code": "requestformLR2",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "AssumingIns",
+    "source_label": "Purchaser/Assuming institution of a failed bank",
+    "action_label": "Request an Allonge",
+    "action_code": "requestformLR3",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "AssumingIns",
+    "source_label": "Purchaser/Assuming institution of a failed bank",
+    "action_label": "Request an Assignment of Mortgage",
+    "action_code": "requestformLR1",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "AssumingIns",
+    "source_label": "Purchaser/Assuming institution of a failed bank",
+    "action_label": "Request permission regarding the custody of failed bank records",
+    "action_code": "recordsdestructionform",
+    "route_path": "/recordsdestructionform",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/recordsdestructionform",
+    "route_family": "internal-route"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Ask some other question",
+    "action_code": "requestformRR4",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Inquire about my loan which was retained by the FDIC",
+    "action_code": "requestformAssetRetainedLoan",
+    "route_path": "/requestform?sub=Retained Loan&type=Asset Management",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Retained Loan&type=Asset Management",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Purchase FDIC Real Estate",
+    "action_code": "requestformAsset",
+    "route_path": "/requestform?sub=ORE Deed Request&type=Asset Management",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=ORE Deed Request&type=Asset Management",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request a copy of a Purchase & Assumption Agreement",
+    "action_code": "paAgreement",
+    "route_path": "https://www.fdic.gov/bank/individual/failed/banklist.html",
+    "endpoint": "https://www.fdic.gov/bank/individual/failed/banklist.html",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request a Form 1098, 1099, or W2",
+    "action_code": "taxUnit",
+    "route_path": "/factsemailsend?send=taxUnit",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=taxUnit",
+    "route_family": "fact-email-send"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request a Form 480-7A for interest paid from R & G Mortgage Corporation",
+    "action_code": "requestformRR1",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request a Lien Release",
+    "action_code": "requestformLR",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request a Paid-in-Full letter from R & G Mortgage Corporation",
+    "action_code": "requestformLR6",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request a Promissory Note (“Pagare”) from R & G Mortgage Corporation",
+    "action_code": "requestformLR5",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request a Quitclaim Deed or a Deed Without Warranty",
+    "action_code": "requestformLR3",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request an Allonge",
+    "action_code": "requestformLR4",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request an Appointment of Receiver letter",
+    "action_code": "Receivership",
+    "route_path": "/factsemailsend?send=Receivership",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=Receivership",
+    "route_family": "fact-email-send"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request an Assignment of Mortgage",
+    "action_code": "requestformLR2",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request certification of a bank merger or name change",
+    "action_code": "bankMerger",
+    "route_path": "/factsemailsend?send=bankMerger",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=bankMerger",
+    "route_family": "fact-email-send"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request copies of loan documents or payment history",
+    "action_code": "requestformRR2",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Request my tax payment history from R & G Mortgage Corporation",
+    "action_code": "requestformRR",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Attorney",
+    "source_label": "Company or individual inquiring about a failed bank",
+    "action_label": "Verify the previous employment of a failed bank employee",
+    "action_code": "requestformRR3",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Banker",
+    "source_label": "Banker",
+    "action_label": "Request a Lien Release From a Failed Institution",
+    "action_code": "fdicLienRelease",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Banker",
+    "source_label": "Banker",
+    "action_label": "Request FDIC Supplies",
+    "action_code": "fdiccatalog",
+    "route_path": "https://catalog.fdic.gov",
+    "endpoint": "https://catalog.fdic.gov",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Banker",
+    "source_label": "Banker",
+    "action_label": "Submit a Complaint Against FDIC",
+    "action_code": "fdicooform",
+    "route_path": "/fdiccommentform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccommentform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Banker",
+    "source_label": "Banker",
+    "action_label": "Submit a Deposit Insurance Question",
+    "action_code": "fdicdiform",
+    "route_path": "/fdicdepositinsuranceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdepositinsuranceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Banker",
+    "source_label": "Banker",
+    "action_label": "Submit a Question About FDIC Analysis or The Quarterly Banking Profile (QBP)",
+    "action_code": "fdicdirform",
+    "route_path": "/fdicdirform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Banker",
+    "source_label": "Banker",
+    "action_label": "Submit a Question About FDIC Data Tools, BankFind Suite, or Summary of Deposits (SOD)",
+    "action_code": "fdicdirform",
+    "route_path": "/fdicdirform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Banker",
+    "source_label": "Banker",
+    "action_label": "Submit a Regulatory Question",
+    "action_code": "fdiccaform",
+    "route_path": "/fdiccustomerassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccustomerassistanceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Banker",
+    "source_label": "Banker",
+    "action_label": "Submit Concerns About Whether an Entity or Product is FDIC Insured",
+    "action_code": "fdicdimcomplaintform",
+    "route_path": "/fdicdimcomplaintform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdimcomplaintform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Request a Lien Release From a Failed Institution",
+    "action_code": "fdicLienRelease",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Request Help With an Appraisal Problem",
+    "action_code": "fidciaform",
+    "route_path": "/fdicinteragencyform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Request help with FDIC-Insured Banks, Locations, History, or Financial Reports",
+    "action_code": "fdicdirform",
+    "route_path": "/fdicdirform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Submit a Complaint Against a Bank",
+    "action_code": "fdiccaform",
+    "route_path": "/fdiccustomerassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccustomerassistanceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Submit a Complaint Against a Bank as a Consumer/Sole Proprietor of Small Biz",
+    "action_code": "fdicbaform",
+    "route_path": "/fdicbusinessassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicbusinessassistanceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Submit a Complaint Against FDIC",
+    "action_code": "fdicooform",
+    "route_path": "/fdiccommentform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccommentform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Submit a Deposit Insurance Question",
+    "action_code": "fdicdiform",
+    "route_path": "/fdicdepositinsuranceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdepositinsuranceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Submit a Regulatory Question",
+    "action_code": "fdiccaform",
+    "route_path": "/fdiccustomerassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccustomerassistanceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Consumer",
+    "source_label": "Consumer",
+    "action_label": "Submit Concerns About Whether an Entity or Product is FDIC Insured",
+    "action_code": "fdicdimcomplaintform",
+    "route_path": "/fdicdimcomplaintform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdimcomplaintform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Ask some other question",
+    "action_code": "requestformInquiry",
+    "route_path": "/requestform?sub=Inquiry&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Inquiry&type=Depositor Claims",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Change my address with the FDIC",
+    "action_code": "requestformAddress",
+    "route_path": "/requestform?sub=Change of Address&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Change of Address&type=Depositor Claims",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Change the name on my claim with the FDIC",
+    "action_code": "requestformName",
+    "route_path": "/requestform?sub=Name Change&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Name Change&type=Depositor Claims",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Locate my deposit in a failed bank",
+    "action_code": "requestformLocating",
+    "route_path": "/requestform?sub=Locating Deposit&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Locating Deposit&type=Depositor Claims",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Process an IRA transfer from a failed bank",
+    "action_code": "requestformIRA",
+    "route_path": "/requestform?sub=IRA Transfer&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=IRA Transfer&type=Depositor Claims",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Request a Form 1098, 1099, or W2",
+    "action_code": "taxUnit",
+    "route_path": "/factsemailsend?send=taxUnit",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=taxUnit",
+    "route_family": "fact-email-send"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Request copies of bank statements or checks",
+    "action_code": "requestformRR",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Submit a question about a dividend I should have received",
+    "action_code": "requestformUnclaimed",
+    "route_path": "/requestform?sub=Unclaimed Dividends&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Unclaimed Dividends&type=Depositor Claims",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Submit a question about my uninsured deposit claim",
+    "action_code": "requestformUninsured",
+    "route_path": "/requestform?sub=Uninsured Deposit&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Uninsured Deposit&type=Depositor Claims",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Depositor",
+    "source_label": "Depositor in a bank which failed",
+    "action_label": "Update the status of my deposit insurance claim",
+    "action_code": "requestformDepositors",
+    "route_path": "/requestform?sub=Depositors&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Depositors&type=Depositor Claims",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Employee",
+    "source_label": "Employee of a bank which failed",
+    "action_label": "Ask some other question",
+    "action_code": "requestformRR1",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Employee",
+    "source_label": "Employee of a bank which failed",
+    "action_label": "Request a Form 1098, 1099, or W2",
+    "action_code": "taxUnit",
+    "route_path": "/factsemailsend?send=taxUnit",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=taxUnit",
+    "route_family": "fact-email-send"
+  },
+  {
+    "source_type": "Employee",
+    "source_label": "Employee of a bank which failed",
+    "action_label": "Verify my previous employment with a failed bank",
+    "action_code": "requestformRR3",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Find Out Whether My Deposits Are Insured",
+    "action_code": "depositsinsured",
+    "route_path": "http://www.fdic.gov/deposit/deposits/",
+    "endpoint": "http://www.fdic.gov/deposit/deposits/",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Go to FAQs Site for Industry Analysis",
+    "action_code": "faqsite",
+    "route_path": "http://www.fdic.gov/bank/iafaq.html",
+    "endpoint": "http://www.fdic.gov/bank/iafaq.html",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Go To the FDIC Homepage",
+    "action_code": "fdichomepage",
+    "route_path": "https://www.fdic.gov/",
+    "endpoint": "https://www.fdic.gov/",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Go to the Online Ordering Catalog",
+    "action_code": "fdiccatalog",
+    "route_path": "https://catalog.fdic.gov",
+    "endpoint": "https://catalog.fdic.gov",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Know More About the FDIC",
+    "action_code": "knowmore",
+    "route_path": "http://www.fdic.gov/consumers/banking/confidence/symbol.html",
+    "endpoint": "http://www.fdic.gov/consumers/banking/confidence/symbol.html",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Know More About When a Bank Fails – Facts for Depositors, Creditors, and Borrowers",
+    "action_code": "factssite",
+    "route_path": "http://www.fdic.gov/consumers/banking/facts/index.html",
+    "endpoint": "http://www.fdic.gov/consumers/banking/facts/index.html",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Request a Lien Release from a Failed Institution",
+    "action_code": "fdicLienRelease",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "See FDIC Contact Center Hours of Operation",
+    "action_code": "callcenterhours",
+    "route_path": "https://www.fdic.gov/about/contact/ask/",
+    "endpoint": "https://www.fdic.gov/about/contact/ask/",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Submit a Complaint Against a Bank",
+    "action_code": "fdiccaform",
+    "route_path": "/fdiccustomerassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccustomerassistanceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Submit a Complaint Against FDIC",
+    "action_code": "fdicooform",
+    "route_path": "/fdiccommentform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccommentform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Submit a Deposit Insurance Question",
+    "action_code": "fdicdiform",
+    "route_path": "/fdicdepositinsuranceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdepositinsuranceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Submit a Question About FDIC Analysis or FDIC Data Tools",
+    "action_code": "fdicdirform",
+    "route_path": "/fdicdirform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Submit a Regulatory Question",
+    "action_code": "fdiccaform",
+    "route_path": "/fdiccustomerassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccustomerassistanceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Submit an Appraisal Related Complaint",
+    "action_code": "fidciaform",
+    "route_path": "/fdicinteragencyform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "Submit Concerns About Whether an Entity or Product is FDIC Insured",
+    "action_code": "fdicdimcomplaintform",
+    "route_path": "/fdicdimcomplaintform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdimcomplaintform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Other",
+    "source_label": "Other",
+    "action_label": "View Frequently Asked Questions for Deposit Insurance",
+    "action_code": "diFAQs",
+    "route_path": "http://www.fdic.gov/deposit/difaq.html",
+    "endpoint": "http://www.fdic.gov/deposit/difaq.html",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Researcher",
+    "source_label": "Researcher",
+    "action_label": "Look for a Bank Data Guide",
+    "action_code": "bankdataguide",
+    "route_path": "https://www.fdic.gov/bank/statistical/guide/",
+    "endpoint": "https://www.fdic.gov/bank/statistical/guide/",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Researcher",
+    "source_label": "Researcher",
+    "action_label": "Submit a Question About FDIC Analysis or The Quarterly Banking Profile (QBP)",
+    "action_code": "fdicdirform",
+    "route_path": "/fdicdirform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Researcher",
+    "source_label": "Researcher",
+    "action_label": "Submit a Question About FDIC Data Tools, BankFind Suite, or Summary of Deposits (SOD)",
+    "action_code": "fdicdirform",
+    "route_path": "/fdicdirform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "Researcher",
+    "source_label": "Researcher",
+    "action_label": "Submit a Question About The Central Data Depository, CALL Reports, Call Data and UBPR Reports",
+    "action_code": "helpdeskform",
+    "route_path": "https://cdr.ffiec.gov/public/HelpFileContainers/HelpDeskForm.aspx",
+    "endpoint": "https://cdr.ffiec.gov/public/HelpFileContainers/HelpDeskForm.aspx",
+    "route_family": "external-url"
+  },
+  {
+    "source_type": "Researcher",
+    "source_label": "Researcher",
+    "action_label": "Submit Concerns About Whether an Entity or Product is FDIC Insured",
+    "action_code": "fdicdimcomplaintform",
+    "route_path": "/fdicdimcomplaintform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdimcomplaintform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "SBO",
+    "source_label": "Small Business Owner",
+    "action_label": "Request Help With an Appraisal Problem",
+    "action_code": "fidciaform",
+    "route_path": "/fdicinteragencyform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "SBO",
+    "source_label": "Small Business Owner",
+    "action_label": "Submit a Complaint Against a Bank",
+    "action_code": "fdicbaform",
+    "route_path": "/fdicbusinessassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicbusinessassistanceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "SBO",
+    "source_label": "Small Business Owner",
+    "action_label": "Submit a Complaint Against FDIC",
+    "action_code": "fdicooform",
+    "route_path": "/fdiccommentform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccommentform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "SBO",
+    "source_label": "Small Business Owner",
+    "action_label": "Submit a Deposit Insurance Question",
+    "action_code": "fdicdiform",
+    "route_path": "/fdicdepositinsuranceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdepositinsuranceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "SBO",
+    "source_label": "Small Business Owner",
+    "action_label": "Submit a Regulatory Question",
+    "action_code": "fdicbaform",
+    "route_path": "/fdicbusinessassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicbusinessassistanceform/",
+    "route_family": "internal-webform"
+  },
+  {
+    "source_type": "SBO",
+    "source_label": "Small Business Owner",
+    "action_label": "Submit Concerns About Whether an Entity or Product is FDIC Insured",
+    "action_code": "fdicdimcomplaintform",
+    "route_path": "/fdicdimcomplaintform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdimcomplaintform/",
+    "route_family": "internal-webform"
+  }
+]

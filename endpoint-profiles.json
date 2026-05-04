@@ -1,0 +1,202 @@
+{
+  "fdiccaform": {
+    "label": "Bank and Consumer Response Team",
+    "queueCode": "Q-BCR",
+    "pattern": "intake",
+    "sections": ["narrative", "identity", "mailingAddress", "authorization"],
+    "requiredFields": ["firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState", "mailingPostal", "mailingCountry", "narrative", "authorization"],
+    "conditionalFields": {},
+    "notes": "Authorization is treated as required in the prototype; the field matrix observed the checkbox as present but did not flag it as a required field."
+  },
+  "fdiccommentform": {
+    "label": "Office of the Ombudsman",
+    "queueCode": "Q-OO",
+    "pattern": "intake",
+    "sections": ["narrative"],
+    "requiredFields": ["narrative"],
+    "conditionalFields": {},
+    "notes": "The prototype asks for desired-resolution details only on report-style topics where a remedy is material."
+  },
+  "fdicbaform": {
+    "label": "Small Business Banking Team",
+    "queueCode": "Q-SB",
+    "pattern": "intake",
+    "sections": ["narrative", "identity", "mailingAddress", "authorization"],
+    "requiredFields": ["firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState", "mailingCountry", "narrative", "authorization"],
+    "conditionalFields": {},
+    "notes": "Confirm email matches the field matrix, and authorization is treated as required in the prototype even though the matrix only observed the checkbox as present."
+  },
+  "fdicdiform": {
+    "label": "Deposit Insurance Specialist Team",
+    "queueCode": "Q-DI",
+    "pattern": "intake",
+    "sections": ["narrative", "identity", "mailingAddress", "authorization"],
+    "requiredFields": ["firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState", "mailingCountry", "narrative", "authorization"],
+    "conditionalFields": {},
+    "notes": "Authorization is treated as required in the prototype even though the matrix only observed the checkbox as present."
+  },
+  "fdicdirform": {
+    "label": "Data and Directory Support Team",
+    "queueCode": "Q-DATA",
+    "pattern": "intake",
+    "sections": ["identity", "narrative"],
+    "requiredFields": ["firstName", "lastName", "email", "emailConfirm", "narrative"],
+    "conditionalFields": {},
+    "notes": "This lightweight DIR path collects only identity and narrative fields."
+  },
+  "fidciaform": {
+    "label": "Interagency Appraisal Review Team",
+    "queueCode": "Q-APR",
+    "pattern": "intake",
+    "sections": ["appraisalDetails", "narrative", "identity", "mailingAddress", "authorization"],
+    "requiredFields": ["appraisalRole", "propertyStreet", "propertyCity", "firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState", "mailingCountry", "narrative", "authorization"],
+    "conditionalFields": {},
+    "notes": "Appraisal-specific fields and authorization are added in P4. Property street and city are required in the prototype; conditional logic by role deferred to production."
+  },
+  "fdicdimcomplaintform": {
+    "label": "Insured Status Review Team",
+    "queueCode": "Q-ISR",
+    "pattern": "intake",
+    "sections": ["narrative"],
+    "requiredFields": ["narrative"],
+    "conditionalFields": {},
+    "notes": "The prototype asks for desired-resolution details only on report-style insured-status concerns where a remedy is material."
+  },
+  "requestformDepositor": {
+    "label": "Failed Bank Depositor Services Team",
+    "queueCode": "Q-DEP",
+    "pattern": "intake",
+    "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "conditionalFields": {},
+    "notes": "Subtype handling and failed-bank identification are added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+  },
+  "fdicLienRelease": {
+    "label": "Lien and Loan Documents Team",
+    "queueCode": "Q-LIEN",
+    "pattern": "intake",
+    "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "conditionalFields": {},
+    "notes": "The observed requestform lien-release family shares the seven-field failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+  },
+  "requestform-RecordsResearch": {
+    "label": "Failed Bank Records Research Team",
+    "queueCode": "Q-RR",
+    "pattern": "intake",
+    "sections": ["documentRequestType", "failedBankIdentification", "narrative", "identity", "mailingAddress"],
+    "requiredFields": ["documentRequestType", "failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "conditionalFields": {},
+    "notes": "Document-request details and failed-bank identification are added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+  },
+  "requestform-AssetManagement": {
+    "label": "Failed Bank Asset Management Team",
+    "queueCode": "Q-AM",
+    "pattern": "intake",
+    "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "conditionalFields": {},
+    "notes": "Failed-bank identification and asset-specific subtype routing are added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+  },
+  "powerofattorneyform": {
+    "label": "Failed Bank Limited Power of Attorney Team",
+    "queueCode": "Q-LPOA",
+    "pattern": "intake",
+    "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "conditionalFields": {},
+    "notes": "The observed form shares the seven-field failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+  },
+  "recordsdestructionform": {
+    "label": "Failed Bank Records Custody Team",
+    "queueCode": "Q-CUST",
+    "pattern": "intake",
+    "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "conditionalFields": {},
+    "notes": "The observed form shares the seven-field failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+  },
+  "factsemailsend-taxUnit": {
+    "label": "Tax Document Request",
+    "queueCode": null,
+    "pattern": "email-send",
+    "sections": [],
+    "requiredFields": [],
+    "conditionalFields": {},
+    "prefilled": {
+      "to": "taxeoyreporting@fdic.gov",
+      "subject": "Request a Form 1098, 1099, or W2"
+    },
+    "phoneFallback": true,
+    "failedBankPhoneFallback": true
+  },
+  "factsemailsend-Receivership": {
+    "label": "Appointment of Receiver Letter Request",
+    "queueCode": null,
+    "pattern": "email-send",
+    "sections": [],
+    "requiredFields": [],
+    "conditionalFields": {},
+    "prefilled": {
+      "to": "Certifications@fdic.gov",
+      "subject": "Request an Appointment of Receiver letter"
+    },
+    "phoneFallback": false,
+    "failedBankPhoneFallback": true
+  },
+  "factsemailsend-bankMerger": {
+    "label": "Bank Merger or Name Change Certification Request",
+    "queueCode": null,
+    "pattern": "email-send",
+    "sections": [],
+    "requiredFields": [],
+    "conditionalFields": {},
+    "prefilled": {
+      "to": "Certifications@fdic.gov",
+      "subject": "Request certification of a bank merger or name change"
+    },
+    "phoneFallback": false,
+    "failedBankPhoneFallback": true
+  },
+  "paAgreement": {
+    "label": "Purchase & Assumption Agreement",
+    "queueCode": null,
+    "pattern": "external-handoff",
+    "sections": [],
+    "requiredFields": [],
+    "conditionalFields": {},
+    "url": "https://www.fdic.gov/bank-failures/failed-bank-list",
+    "description": "View the FDIC Failed Bank List to find Purchase & Assumption Agreements.",
+    "failedBankPhoneFallback": true
+  },
+  "helpdeskform": {
+    "label": "FFIEC Help Desk",
+    "queueCode": null,
+    "pattern": "external-handoff",
+    "sections": [],
+    "requiredFields": [],
+    "conditionalFields": {},
+    "url": "https://cdr.ffiec.gov/public/HelpFileContainers/HelpDeskForm.aspx",
+    "description": "Use the FFIEC Help Desk for Central Data Depository, Call Report, Call Data, and UBPR questions."
+  },
+  "fdicGeneralInfo": {
+    "label": "FDIC.gov information",
+    "queueCode": null,
+    "pattern": "self-service",
+    "sections": [],
+    "requiredFields": [],
+    "conditionalFields": {},
+    "url": "https://www.fdic.gov",
+    "description": "Visit FDIC.gov for general information, hours, deposit insurance basics, and FAQs."
+  },
+  "fdiccatalog": {
+    "label": "FDIC Catalog",
+    "queueCode": null,
+    "pattern": "external-handoff",
+    "sections": [],
+    "requiredFields": [],
+    "conditionalFields": {},
+    "url": "https://catalog.fdic.gov",
+    "description": "Use the FDIC catalog to order printed supplies and materials."
+  }
+}
