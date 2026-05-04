@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-dotcom
   cancel-in-progress: true
 
 env:
