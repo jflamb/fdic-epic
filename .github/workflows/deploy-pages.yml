@@ -7,68 +7,56 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
-env:
-  PAGES_ARTIFACT_PATH: .
-
 jobs:
-  build-dotcom:
-    if: github.server_url == 'https://github.com'
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          path: ${{ env.PAGES_ARTIFACT_PATH }}
+          node-version: 22
+          cache: npm
 
-  deploy-dotcom:
-    if: github.server_url == 'https://github.com'
-    needs: build-dotcom
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Install dependencies
+        run: npm ci
 
-  build-ghes:
-    if: github.server_url != 'https://github.com'
-    runs-on: ${{ fromJSON(vars.RUNNER || '["linux","on-azure","prod"]') }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: Test
+        run: npm test
 
-      - name: Configure Pages
-        uses: actions/configure-pages@v3
+      - name: Build
+        run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Prepare Pages artifact
+        run: |
+          mkdir _site
+          rsync -av \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.claude/' \
+            --exclude '_site/' \
+            --exclude 'node_modules/' \
+            --exclude 'scripts/' \
+            --exclude 'tests/' \
+            --exclude 'AGENTS.md' \
+            --exclude 'README.md' \
+            --exclude 'package.json' \
+            --exclude 'package-lock.json' \
+            --exclude '*.md' \
+            ./ _site/
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: ${{ env.PAGES_ARTIFACT_PATH }}
-
-  deploy-ghes:
-    if: github.server_url != 'https://github.com'
-    needs: build-ghes
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ${{ fromJSON(vars.RUNNER || '["linux","on-azure","prod"]') }}
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v2
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./_site
+          force_orphan: true
