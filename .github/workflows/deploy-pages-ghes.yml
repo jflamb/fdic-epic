@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PAGES_ARTIFACT_PATH: _site
+  PAGES_ARTIFACT_PATH: .
 
 jobs:
   build:
@@ -26,50 +26,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
       - name: Configure Pages
         uses: actions/configure-pages@v3
-
-      - name: Install dependencies
-        run: |
-          for attempt in 1 2 3; do
-            npm ci --prefer-offline --no-audit && exit 0
-
-            if [ "$attempt" = "3" ]; then
-              exit 1
-            fi
-
-            sleep $((attempt * 20))
-          done
-
-      - name: Test
-        run: npm test
-
-      - name: Build
-        run: npm run build
-
-      - name: Prepare Pages artifact
-        run: |
-          mkdir _site
-          rsync -av \
-            --exclude '.git/' \
-            --exclude '.github/' \
-            --exclude '.claude/' \
-            --exclude '_site/' \
-            --exclude 'node_modules/' \
-            --exclude 'scripts/' \
-            --exclude 'tests/' \
-            --exclude 'AGENTS.md' \
-            --exclude 'README.md' \
-            --exclude 'package.json' \
-            --exclude 'package-lock.json' \
-            --exclude '*.md' \
-            ./ _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
