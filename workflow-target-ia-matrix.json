@@ -1,0 +1,446 @@
+{
+  "target_paths": [
+    {
+      "id": "T1_REPORT_BANK_OR_FDIC_CONCERN",
+      "nav": "Report a Problem",
+      "intent": "Complaint or concern",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccustomerassistanceform/",
+      "required_fields": "Topic, narrative, outcome, contact details",
+      "notes": "Primary path for bank or FDIC concerns; replaces multiple overlapping complaint labels."
+    },
+    {
+      "id": "T2_REPORT_SMALL_BUSINESS_BANK_CONCERN",
+      "nav": "Report a Problem",
+      "intent": "Small business bank concern",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicbusinessassistanceform/",
+      "required_fields": "Topic, business context, narrative, outcome, contact details",
+      "notes": "Used when issue is tied to small-business banking products/services."
+    },
+    {
+      "id": "T3_ASK_DEPOSIT_INSURANCE",
+      "nav": "Ask a Question",
+      "intent": "Deposit insurance question",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdepositinsuranceform/",
+      "required_fields": "Question category, narrative, outcome, contact details",
+      "notes": "Canonical route for insurance coverage/claims questions."
+    },
+    {
+      "id": "T4_ASK_BANK_DATA_AND_RESEARCH",
+      "nav": "Ask a Question",
+      "intent": "Bank data, history, and reporting",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+      "required_fields": "Data topic, narrative, contact details",
+      "notes": "Consolidates FDIC analysis, bank history, and data-tools requests."
+    },
+    {
+      "id": "T5_REPORT_APPRAISAL_ISSUE",
+      "nav": "Report a Problem",
+      "intent": "Appraisal concern",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+      "required_fields": "Appraisal type, narrative, supporting details, contact details",
+      "notes": "Single path for all appraisal-related concerns."
+    },
+    {
+      "id": "T6_REPORT_INSURED_STATUS_MISREPRESENTATION",
+      "nav": "Report a Problem",
+      "intent": "FDIC-insured status concern",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdimcomplaintform/",
+      "required_fields": "Entity/product details, narrative, evidence, contact details",
+      "notes": "Dedicated route for misrepresentation of FDIC insurance status."
+    },
+    {
+      "id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "nav": "Get Help with a Failed Bank",
+      "intent": "Depositor claims and account servicing",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Depositor%20Claims",
+      "required_fields": "Request type, failed bank, narrative, contact details",
+      "notes": "Includes address/name changes, uninsured claim questions, and dividend/deposit status."
+    },
+    {
+      "id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "nav": "Get Help with a Failed Bank",
+      "intent": "Lien release and collateral documents",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien%20Release",
+      "required_fields": "Document type, failed bank, borrower/property identifiers, contact details",
+      "notes": "Consolidates lien release, assignment, allonge, and related collateral requests."
+    },
+    {
+      "id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "nav": "Get Help with a Failed Bank",
+      "intent": "Records research, employment verification, tax forms",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records%20Research",
+      "required_fields": "Record type, institution, identifiers, contact details",
+      "notes": "Includes bank statement/check copies, employment verification, records inquiries."
+    },
+    {
+      "id": "T10_FAILED_BANK_ASSET_AND_REAL_ESTATE",
+      "nav": "Get Help with a Failed Bank",
+      "intent": "Asset management and real estate transactions",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Asset%20Management",
+      "required_fields": "Asset type, transaction context, identifiers, contact details",
+      "notes": "Includes retained loans, ORE deed requests, and property/asset transactions."
+    },
+    {
+      "id": "T11_PARTNER_OR_SPECIALIZED_EXTERNAL",
+      "nav": "Ask a Question",
+      "intent": "Partner system or specialized external workflow",
+      "canonical_destination": "External/partner route based on topic",
+      "required_fields": "Minimal routing metadata only before handoff",
+      "notes": "Used for catalog ordering, FFIEC helpdesk, and other external destinations."
+    },
+    {
+      "id": "T12_SELF_SERVICE_INFORMATION",
+      "nav": "Ask a Question",
+      "intent": "Self-service guidance and educational content",
+      "canonical_destination": "FDIC.gov informational page",
+      "required_fields": "None",
+      "notes": "Route users directly to trusted info pages when case intake is not needed."
+    },
+    {
+      "id": "T13_VIEW_MY_CASES",
+      "nav": "View My Cases",
+      "intent": "Case tracking and follow-up",
+      "canonical_destination": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/mycases",
+      "required_fields": "Authenticated user session",
+      "notes": "Separate from intake; monitor status and updates."
+    }
+  ],
+  "crosswalk": [
+    {
+      "action_code": "Receivership",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=Receivership",
+      "target_path_id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "bankMerger",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=bankMerger",
+      "target_path_id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "bankdataguide",
+      "current_endpoint": "https://www.fdic.gov/bank/statistical/guide/",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "callcenterhours",
+      "current_endpoint": "https://www.fdic.gov/about/contact/ask/",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "depositsinsured",
+      "current_endpoint": "http://www.fdic.gov/deposit/deposits/",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "diFAQs",
+      "current_endpoint": "http://www.fdic.gov/deposit/difaq.html",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "factssite",
+      "current_endpoint": "http://www.fdic.gov/consumers/banking/facts/index.html",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "failBankList",
+      "current_endpoint": "https://www.fdic.gov/bank/individual/failed/banklist.html",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": false
+    },
+    {
+      "action_code": "faqsite",
+      "current_endpoint": "http://www.fdic.gov/bank/iafaq.html",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdicLienRelease",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+      "target_path_id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdicbaform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicbusinessassistanceform/",
+      "target_path_id": "T2_REPORT_SMALL_BUSINESS_BANK_CONCERN",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdiccaform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccustomerassistanceform/",
+      "target_path_id": "T1_REPORT_BANK_OR_FDIC_CONCERN",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdiccatalog",
+      "current_endpoint": "https://catalog.fdic.gov",
+      "target_path_id": "T11_PARTNER_OR_SPECIALIZED_EXTERNAL",
+      "disposition": "keep-external",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdicdiform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdepositinsuranceform/",
+      "target_path_id": "T3_ASK_DEPOSIT_INSURANCE",
+      "disposition": "keep",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdicdimcomplaintform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdimcomplaintform/",
+      "target_path_id": "T6_REPORT_INSURED_STATUS_MISREPRESENTATION",
+      "disposition": "keep",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdicdirform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+      "target_path_id": "T4_ASK_BANK_DATA_AND_RESEARCH",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdichomepage",
+      "current_endpoint": "https://www.fdic.gov/",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fdicooform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccommentform/",
+      "target_path_id": "T1_REPORT_BANK_OR_FDIC_CONCERN",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "fidciaform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+      "target_path_id": "T5_REPORT_APPRAISAL_ISSUE",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "helpdeskform",
+      "current_endpoint": "https://cdr.ffiec.gov/public/HelpFileContainers/HelpDeskForm.aspx",
+      "target_path_id": "T11_PARTNER_OR_SPECIALIZED_EXTERNAL",
+      "disposition": "keep-external",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "knowmore",
+      "current_endpoint": "http://www.fdic.gov/consumers/banking/confidence/symbol.html",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "oowebsite",
+      "current_endpoint": "https://www.fdic.gov/regulations/resources/ombudsman/index.html",
+      "target_path_id": "T12_SELF_SERVICE_INFORMATION",
+      "disposition": "self-service",
+      "observed_in_active_source_lists": false
+    },
+    {
+      "action_code": "paAgreement",
+      "current_endpoint": "https://www.fdic.gov/bank/individual/failed/banklist.html",
+      "target_path_id": "T10_FAILED_BANK_ASSET_AND_REAL_ESTATE",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "powerofattorneyform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/powerofattorneyform",
+      "target_path_id": "T10_FAILED_BANK_ASSET_AND_REAL_ESTATE",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "recordsdestructionform",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/recordsdestructionform",
+      "target_path_id": "T10_FAILED_BANK_ASSET_AND_REAL_ESTATE",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformAddress",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Change of Address&type=Depositor Claims",
+      "target_path_id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformAsset",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=ORE Deed Request&type=Asset Management",
+      "target_path_id": "T10_FAILED_BANK_ASSET_AND_REAL_ESTATE",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformAssetRetainedLoan",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Retained Loan&type=Asset Management",
+      "target_path_id": "T10_FAILED_BANK_ASSET_AND_REAL_ESTATE",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformDepositors",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Depositors&type=Depositor Claims",
+      "target_path_id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformIRA",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=IRA Transfer&type=Depositor Claims",
+      "target_path_id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformInquiry",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Inquiry&type=Depositor Claims",
+      "target_path_id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformLR",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+      "target_path_id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformLR1",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+      "target_path_id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformLR2",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+      "target_path_id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformLR3",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+      "target_path_id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformLR4",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+      "target_path_id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformLR5",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+      "target_path_id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformLR6",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+      "target_path_id": "T8_FAILED_BANK_LIEN_AND_LOAN_DOCUMENTS",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformLocating",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Locating Deposit&type=Depositor Claims",
+      "target_path_id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformName",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Name Change&type=Depositor Claims",
+      "target_path_id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformRR",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+      "target_path_id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformRR1",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+      "target_path_id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformRR2",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+      "target_path_id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformRR3",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+      "target_path_id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformRR4",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+      "target_path_id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformUnclaimed",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Unclaimed Dividends&type=Depositor Claims",
+      "target_path_id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "requestformUninsured",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Uninsured Deposit&type=Depositor Claims",
+      "target_path_id": "T7_FAILED_BANK_DEPOSITOR_SERVICES",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    },
+    {
+      "action_code": "taxUnit",
+      "current_endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=taxUnit",
+      "target_path_id": "T9_FAILED_BANK_RECORDS_AND_EMPLOYMENT",
+      "disposition": "merge",
+      "observed_in_active_source_lists": true
+    }
+  ]
+}

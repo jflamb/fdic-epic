@@ -1,0 +1,24 @@
+Thumbs.db
+.DS_Store
+
+# Workspace/editor files
+*.code-workspace
+.vscode/
+.idea/
+
+# Local scratch/reference files
+fdic_ref.html
+tmp/
+temp/
+
+# Logs and runtime artifacts
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules/
+
+# Swap/backup files
+*.swp
+*.swo
+*~

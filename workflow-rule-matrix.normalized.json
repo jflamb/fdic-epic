@@ -1,0 +1,912 @@
+[
+  {
+    "action_code": "bankdataguide",
+    "route_path": "https://www.fdic.gov/bank/statistical/guide/",
+    "endpoint": "https://www.fdic.gov/bank/statistical/guide/",
+    "route_family": "external-url",
+    "labels": [
+      "Look for a Bank Data Guide"
+    ],
+    "source_types": [
+      "Researcher"
+    ],
+    "source_labels": [
+      "Researcher"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "bankMerger",
+    "route_path": "/factsemailsend?send=bankMerger",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=bankMerger",
+    "route_family": "fact-email-send",
+    "labels": [
+      "Request certification of a bank merger or name change"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "callcenterhours",
+    "route_path": "https://www.fdic.gov/about/contact/ask/",
+    "endpoint": "https://www.fdic.gov/about/contact/ask/",
+    "route_family": "external-url",
+    "labels": [
+      "See FDIC Contact Center Hours of Operation"
+    ],
+    "source_types": [
+      "Other"
+    ],
+    "source_labels": [
+      "Other"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "depositsinsured",
+    "route_path": "http://www.fdic.gov/deposit/deposits/",
+    "endpoint": "http://www.fdic.gov/deposit/deposits/",
+    "route_family": "external-url",
+    "labels": [
+      "Find Out Whether My Deposits Are Insured"
+    ],
+    "source_types": [
+      "Other"
+    ],
+    "source_labels": [
+      "Other"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "diFAQs",
+    "route_path": "http://www.fdic.gov/deposit/difaq.html",
+    "endpoint": "http://www.fdic.gov/deposit/difaq.html",
+    "route_family": "external-url",
+    "labels": [
+      "View Frequently Asked Questions for Deposit Insurance"
+    ],
+    "source_types": [
+      "Other"
+    ],
+    "source_labels": [
+      "Other"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "factssite",
+    "route_path": "http://www.fdic.gov/consumers/banking/facts/index.html",
+    "endpoint": "http://www.fdic.gov/consumers/banking/facts/index.html",
+    "route_family": "external-url",
+    "labels": [
+      "Know More About When a Bank Fails – Facts for Depositors, Creditors, and Borrowers"
+    ],
+    "source_types": [
+      "Other"
+    ],
+    "source_labels": [
+      "Other"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "faqsite",
+    "route_path": "http://www.fdic.gov/bank/iafaq.html",
+    "endpoint": "http://www.fdic.gov/bank/iafaq.html",
+    "route_family": "external-url",
+    "labels": [
+      "Go to FAQs Site for Industry Analysis"
+    ],
+    "source_types": [
+      "Other"
+    ],
+    "source_labels": [
+      "Other"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "fdicbaform",
+    "route_path": "/fdicbusinessassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicbusinessassistanceform/",
+    "route_family": "internal-webform",
+    "labels": [
+      "Submit a Complaint Against a Bank",
+      "Submit a Complaint Against a Bank as a Consumer/Sole Proprietor of Small Biz",
+      "Submit a Regulatory Question"
+    ],
+    "source_types": [
+      "Consumer",
+      "SBO"
+    ],
+    "source_labels": [
+      "Consumer",
+      "Small Business Owner"
+    ],
+    "label_count": 3,
+    "source_count": 2,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "fdiccaform",
+    "route_path": "/fdiccustomerassistanceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccustomerassistanceform/",
+    "route_family": "internal-webform",
+    "labels": [
+      "Submit a Complaint Against a Bank",
+      "Submit a Regulatory Question"
+    ],
+    "source_types": [
+      "Banker",
+      "Consumer",
+      "Other"
+    ],
+    "source_labels": [
+      "Banker",
+      "Consumer",
+      "Other"
+    ],
+    "label_count": 2,
+    "source_count": 3,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "fdiccatalog",
+    "route_path": "https://catalog.fdic.gov",
+    "endpoint": "https://catalog.fdic.gov",
+    "route_family": "external-url",
+    "labels": [
+      "Go to the Online Ordering Catalog",
+      "Request FDIC Supplies"
+    ],
+    "source_types": [
+      "Banker",
+      "Other"
+    ],
+    "source_labels": [
+      "Banker",
+      "Other"
+    ],
+    "label_count": 2,
+    "source_count": 2,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "fdicdiform",
+    "route_path": "/fdicdepositinsuranceform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdepositinsuranceform/",
+    "route_family": "internal-webform",
+    "labels": [
+      "Submit a Deposit Insurance Question"
+    ],
+    "source_types": [
+      "Banker",
+      "Consumer",
+      "Other",
+      "SBO"
+    ],
+    "source_labels": [
+      "Banker",
+      "Consumer",
+      "Other",
+      "Small Business Owner"
+    ],
+    "label_count": 1,
+    "source_count": 4,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "fdicdimcomplaintform",
+    "route_path": "/fdicdimcomplaintform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdimcomplaintform/",
+    "route_family": "internal-webform",
+    "labels": [
+      "Submit Concerns About Whether an Entity or Product is FDIC Insured"
+    ],
+    "source_types": [
+      "Banker",
+      "Consumer",
+      "Other",
+      "Researcher",
+      "SBO"
+    ],
+    "source_labels": [
+      "Banker",
+      "Consumer",
+      "Other",
+      "Researcher",
+      "Small Business Owner"
+    ],
+    "label_count": 1,
+    "source_count": 5,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "fdicdirform",
+    "route_path": "/fdicdirform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicdirform/",
+    "route_family": "internal-webform",
+    "labels": [
+      "Request help with FDIC-Insured Banks, Locations, History, or Financial Reports",
+      "Submit a Question About FDIC Analysis or FDIC Data Tools",
+      "Submit a Question About FDIC Analysis or The Quarterly Banking Profile (QBP)",
+      "Submit a Question About FDIC Data Tools, BankFind Suite, or Summary of Deposits (SOD)"
+    ],
+    "source_types": [
+      "Banker",
+      "Consumer",
+      "Other",
+      "Researcher"
+    ],
+    "source_labels": [
+      "Banker",
+      "Consumer",
+      "Other",
+      "Researcher"
+    ],
+    "label_count": 4,
+    "source_count": 4,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "fdichomepage",
+    "route_path": "https://www.fdic.gov/",
+    "endpoint": "https://www.fdic.gov/",
+    "route_family": "external-url",
+    "labels": [
+      "Go To the FDIC Homepage"
+    ],
+    "source_types": [
+      "Other"
+    ],
+    "source_labels": [
+      "Other"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "fdicLienRelease",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform",
+    "labels": [
+      "Request a Lien Release From a Failed Institution",
+      "Request a Lien Release from a Failed Institution"
+    ],
+    "source_types": [
+      "Banker",
+      "Consumer",
+      "Other"
+    ],
+    "source_labels": [
+      "Banker",
+      "Consumer",
+      "Other"
+    ],
+    "label_count": 2,
+    "source_count": 3,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "fdicooform",
+    "route_path": "/fdiccommentform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdiccommentform/",
+    "route_family": "internal-webform",
+    "labels": [
+      "Submit a Complaint Against FDIC"
+    ],
+    "source_types": [
+      "Banker",
+      "Consumer",
+      "Other",
+      "SBO"
+    ],
+    "source_labels": [
+      "Banker",
+      "Consumer",
+      "Other",
+      "Small Business Owner"
+    ],
+    "label_count": 1,
+    "source_count": 4,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "fidciaform",
+    "route_path": "/fdicinteragencyform/",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/fdicinteragencyform/",
+    "route_family": "internal-webform",
+    "labels": [
+      "Request Help With an Appraisal Problem",
+      "Submit a Concern Regarding My Changed Appraisal",
+      "Submit a Concern Regarding an Appraisal I Completed For a Bank",
+      "Submit a Concern Regarding an Appraisal Related To a Real Estate Transaction",
+      "Submit an Appraisal Related Complaint"
+    ],
+    "source_types": [
+      "Appraiser",
+      "Consumer",
+      "Other",
+      "SBO"
+    ],
+    "source_labels": [
+      "Appraiser",
+      "Consumer",
+      "Other",
+      "Small Business Owner"
+    ],
+    "label_count": 5,
+    "source_count": 4,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "helpdeskform",
+    "route_path": "https://cdr.ffiec.gov/public/HelpFileContainers/HelpDeskForm.aspx",
+    "endpoint": "https://cdr.ffiec.gov/public/HelpFileContainers/HelpDeskForm.aspx",
+    "route_family": "external-url",
+    "labels": [
+      "Submit a Question About The Central Data Depository, CALL Reports, Call Data and UBPR Reports"
+    ],
+    "source_types": [
+      "Researcher"
+    ],
+    "source_labels": [
+      "Researcher"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "knowmore",
+    "route_path": "http://www.fdic.gov/consumers/banking/confidence/symbol.html",
+    "endpoint": "http://www.fdic.gov/consumers/banking/confidence/symbol.html",
+    "route_family": "external-url",
+    "labels": [
+      "Know More About the FDIC"
+    ],
+    "source_types": [
+      "Other"
+    ],
+    "source_labels": [
+      "Other"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "paAgreement",
+    "route_path": "https://www.fdic.gov/bank/individual/failed/banklist.html",
+    "endpoint": "https://www.fdic.gov/bank/individual/failed/banklist.html",
+    "route_family": "external-url",
+    "labels": [
+      "Request a copy of a Purchase & Assumption Agreement"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "powerofattorneyform",
+    "route_path": "/powerofattorneyform",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/powerofattorneyform",
+    "route_family": "internal-route",
+    "labels": [
+      "Request a Limited Power of Attorney or renewal"
+    ],
+    "source_types": [
+      "AssumingIns"
+    ],
+    "source_labels": [
+      "Purchaser/Assuming institution of a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "Receivership",
+    "route_path": "/factsemailsend?send=Receivership",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=Receivership",
+    "route_family": "fact-email-send",
+    "labels": [
+      "Request an Appointment of Receiver letter"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "External destination; usually opens in a new tab/window."
+  },
+  {
+    "action_code": "recordsdestructionform",
+    "route_path": "/recordsdestructionform",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/recordsdestructionform",
+    "route_family": "internal-route",
+    "labels": [
+      "Request permission regarding the custody of failed bank records"
+    ],
+    "source_types": [
+      "AssumingIns"
+    ],
+    "source_labels": [
+      "Purchaser/Assuming institution of a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Internal routes for authenticated users commonly include ?cid=<ContactId> when opened."
+  },
+  {
+    "action_code": "requestformAddress",
+    "route_path": "/requestform?sub=Change of Address&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Change of Address&type=Depositor Claims",
+    "route_family": "requestform",
+    "labels": [
+      "Change my address with the FDIC"
+    ],
+    "source_types": [
+      "Depositor"
+    ],
+    "source_labels": [
+      "Depositor in a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformAsset",
+    "route_path": "/requestform?sub=ORE Deed Request&type=Asset Management",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=ORE Deed Request&type=Asset Management",
+    "route_family": "requestform",
+    "labels": [
+      "Purchase FDIC Real Estate"
+    ],
+    "source_types": [
+      "AssumingIns",
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank",
+      "Purchaser/Assuming institution of a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 2,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformAssetRetainedLoan",
+    "route_path": "/requestform?sub=Retained Loan&type=Asset Management",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Retained Loan&type=Asset Management",
+    "route_family": "requestform",
+    "labels": [
+      "Inquire about my loan which was retained by the FDIC"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformDepositors",
+    "route_path": "/requestform?sub=Depositors&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Depositors&type=Depositor Claims",
+    "route_family": "requestform",
+    "labels": [
+      "Update the status of my deposit insurance claim"
+    ],
+    "source_types": [
+      "Depositor"
+    ],
+    "source_labels": [
+      "Depositor in a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformInquiry",
+    "route_path": "/requestform?sub=Inquiry&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Inquiry&type=Depositor Claims",
+    "route_family": "requestform",
+    "labels": [
+      "Ask some other question"
+    ],
+    "source_types": [
+      "Depositor"
+    ],
+    "source_labels": [
+      "Depositor in a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformIRA",
+    "route_path": "/requestform?sub=IRA Transfer&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=IRA Transfer&type=Depositor Claims",
+    "route_family": "requestform",
+    "labels": [
+      "Process an IRA transfer from a failed bank"
+    ],
+    "source_types": [
+      "Depositor"
+    ],
+    "source_labels": [
+      "Depositor in a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformLocating",
+    "route_path": "/requestform?sub=Locating Deposit&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Locating Deposit&type=Depositor Claims",
+    "route_family": "requestform",
+    "labels": [
+      "Locate my deposit in a failed bank"
+    ],
+    "source_types": [
+      "Depositor"
+    ],
+    "source_labels": [
+      "Depositor in a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformLR",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform",
+    "labels": [
+      "Request a Lien Release"
+    ],
+    "source_types": [
+      "AssumingIns",
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank",
+      "Purchaser/Assuming institution of a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 2,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformLR1",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform",
+    "labels": [
+      "Request an Assignment of Mortgage"
+    ],
+    "source_types": [
+      "AssumingIns"
+    ],
+    "source_labels": [
+      "Purchaser/Assuming institution of a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformLR2",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform",
+    "labels": [
+      "Request a Quitclaim Deed or a Deed Without Warranty",
+      "Request an Assignment of Mortgage"
+    ],
+    "source_types": [
+      "AssumingIns",
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank",
+      "Purchaser/Assuming institution of a failed bank"
+    ],
+    "label_count": 2,
+    "source_count": 2,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformLR3",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform",
+    "labels": [
+      "Request a Quitclaim Deed or a Deed Without Warranty",
+      "Request an Allonge"
+    ],
+    "source_types": [
+      "AssumingIns",
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank",
+      "Purchaser/Assuming institution of a failed bank"
+    ],
+    "label_count": 2,
+    "source_count": 2,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformLR4",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform",
+    "labels": [
+      "Request an Allonge"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformLR5",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform",
+    "labels": [
+      "Request a Promissory Note (“Pagare”) from R & G Mortgage Corporation"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformLR6",
+    "route_path": "/requestform?type=Lien Release",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Lien Release",
+    "route_family": "requestform",
+    "labels": [
+      "Request a Paid-in-Full letter from R & G Mortgage Corporation"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformName",
+    "route_path": "/requestform?sub=Name Change&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Name Change&type=Depositor Claims",
+    "route_family": "requestform",
+    "labels": [
+      "Change the name on my claim with the FDIC"
+    ],
+    "source_types": [
+      "Depositor"
+    ],
+    "source_labels": [
+      "Depositor in a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformRR",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform",
+    "labels": [
+      "Ask some other question",
+      "Request copies of bank statements or checks",
+      "Request my tax payment history from R & G Mortgage Corporation"
+    ],
+    "source_types": [
+      "AssumingIns",
+      "Attorney",
+      "Depositor"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank",
+      "Depositor in a bank which failed",
+      "Purchaser/Assuming institution of a failed bank"
+    ],
+    "label_count": 3,
+    "source_count": 3,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformRR1",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform",
+    "labels": [
+      "Ask some other question",
+      "Request a Form 480-7A for interest paid from R & G Mortgage Corporation"
+    ],
+    "source_types": [
+      "Attorney",
+      "Employee"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank",
+      "Employee of a bank which failed"
+    ],
+    "label_count": 2,
+    "source_count": 2,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformRR2",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform",
+    "labels": [
+      "Request copies of loan documents or payment history"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformRR3",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform",
+    "labels": [
+      "Verify my previous employment with a failed bank",
+      "Verify the previous employment of a failed bank employee"
+    ],
+    "source_types": [
+      "Attorney",
+      "Employee"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank",
+      "Employee of a bank which failed"
+    ],
+    "label_count": 2,
+    "source_count": 2,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformRR4",
+    "route_path": "/requestform?type=Records Research",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?type=Records Research",
+    "route_family": "requestform",
+    "labels": [
+      "Ask some other question"
+    ],
+    "source_types": [
+      "Attorney"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformUnclaimed",
+    "route_path": "/requestform?sub=Unclaimed Dividends&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Unclaimed Dividends&type=Depositor Claims",
+    "route_family": "requestform",
+    "labels": [
+      "Submit a question about a dividend I should have received"
+    ],
+    "source_types": [
+      "Depositor"
+    ],
+    "source_labels": [
+      "Depositor in a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "requestformUninsured",
+    "route_path": "/requestform?sub=Uninsured Deposit&type=Depositor Claims",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/requestform?sub=Uninsured Deposit&type=Depositor Claims",
+    "route_family": "requestform",
+    "labels": [
+      "Submit a question about my uninsured deposit claim"
+    ],
+    "source_types": [
+      "Depositor"
+    ],
+    "source_labels": [
+      "Depositor in a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 1,
+    "notes": "Requestform routes typically append &subject=<selected action label> in navigation logic."
+  },
+  {
+    "action_code": "taxUnit",
+    "route_path": "/factsemailsend?send=taxUnit",
+    "endpoint": "https://ask.fdic.gov/fdicinformationandsupportcenter/s/factsemailsend?send=taxUnit",
+    "route_family": "fact-email-send",
+    "labels": [
+      "Request a Form 1098, 1099, or W2"
+    ],
+    "source_types": [
+      "Attorney",
+      "Depositor",
+      "Employee"
+    ],
+    "source_labels": [
+      "Company or individual inquiring about a failed bank",
+      "Depositor in a bank which failed",
+      "Employee of a bank which failed"
+    ],
+    "label_count": 1,
+    "source_count": 3,
+    "notes": "External destination; usually opens in a new tab/window."
+  }
+]

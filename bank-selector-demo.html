@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FDIC Bank Selector Demo</title>
+    <meta name="description" content="Test the FDIC bank selector component against BankFind institution records." />
+    <link rel="canonical" href="https://jflamb.github.io/fdic-epic/bank-selector-demo.html" />
+    <meta name="robots" content="noindex" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FDIC Information and Support Center" />
+    <meta property="og:title" content="FDIC Bank Selector Demo" />
+    <meta property="og:description" content="Test the FDIC bank selector component against BankFind institution records." />
+    <meta property="og:url" content="https://jflamb.github.io/fdic-epic/bank-selector-demo.html" />
+    <meta property="og:image" content="https://jflamb.github.io/fdic-epic/assets/social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="FDIC Information and Support Center" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="FDIC Bank Selector Demo" />
+    <meta name="twitter:description" content="Test the FDIC bank selector component against BankFind institution records." />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="components/index.bundle.js" defer></script>
+    <script type="module">
+      window.addEventListener("DOMContentLoaded", () => {
+        const selector = document.querySelector("fdic-bank-selector");
+        const output = document.getElementById("selected-bank-output");
+        const clearButton = document.getElementById("clear-bank-selection");
+
+        if (selector && output) {
+          selector.addEventListener("fdic-bank-select", (event) => {
+            output.textContent = JSON.stringify(event.detail.bank, null, 2);
+          });
+
+          selector.addEventListener("fdic-bank-clear", () => {
+            output.textContent = "No bank selected yet.";
+          });
+        }
+
+        if (selector && clearButton) {
+          clearButton.addEventListener("click", () => {
+            selector.clear();
+            output.textContent = "No bank selected yet.";
+          });
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <main class="report-layout report-layout--single bank-selector-demo">
+      <div class="report-main">
+        <nav class="report-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Information &amp; Support Center</a>
+          <span aria-hidden="true">/</span>
+          <span>Bank selector demo</span>
+        </nav>
+
+        <header class="report-header-copy">
+          <p class="eyebrow">Component Demo</p>
+          <h1>FDIC Bank selector</h1>
+          <p>This standalone page exercises the reusable <code>fdic-bank-selector</code> component against the live FDIC BankFind institutions API.</p>
+        </header>
+
+        <section class="report-card">
+          <fdic-bank-selector
+            label="Select a bank"
+            input-id="demo-bank-selector"
+            description="Search by bank name, website, or exact FDIC certificate number. Results show the legal institution record, and the location is the bank's main office."
+            placeholder="For example: Wells Fargo, usbank.com, or 3511"
+          ></fdic-bank-selector>
+
+          <div class="bank-selector-demo__actions">
+            <button id="clear-bank-selection" class="report-next-step__button" type="button">Clear selection</button>
+          </div>
+        </section>
+
+        <section class="report-card bank-selector-demo__result">
+          <h2>Selected bank payload</h2>
+          <pre id="selected-bank-output" class="bank-selector-demo__output">No bank selected yet.</pre>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

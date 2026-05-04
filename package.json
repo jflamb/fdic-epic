@@ -1,0 +1,34 @@
+{
+  "name": "fdic-epic",
+  "version": "1.0.0",
+  "description": "Standalone FDIC support intake static prototype.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/bundle-fdic-epic-components.mjs && node scripts/bundle-fdic-epic-page-script.mjs support-intake.js && node scripts/build-fdic-epic-faq-index.mjs && node scripts/build-fdic-epic-faq-jsonld.mjs",
+    "build:bundle": "node scripts/bundle-fdic-epic-components.mjs",
+    "build:support-intake": "node scripts/bundle-fdic-epic-page-script.mjs support-intake.js",
+    "build:faq-index": "node scripts/build-fdic-epic-faq-index.mjs",
+    "build:faq-jsonld": "node scripts/build-fdic-epic-faq-jsonld.mjs",
+    "build:popular-banks": "node scripts/build-fdic-epic-popular-banks.mjs",
+    "start": "python3 -m http.server 4173",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jflamb/fdic-epic.git"
+  },
+  "keywords": [
+    "fdic",
+    "prototype",
+    "static-site"
+  ],
+  "author": "Jaime Lamb",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jflamb/fdic-epic/issues"
+  },
+  "homepage": "https://jflamb.github.io/fdic-epic/",
+  "dependencies": {
+    "cheerio": "^1.2.0"
+  }
+}

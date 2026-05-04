@@ -1,0 +1,74 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  PAGES_ARTIFACT_PATH: .
+
+jobs:
+  build-dotcom:
+    if: github.server_url == 'https://github.com'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.PAGES_ARTIFACT_PATH }}
+
+  deploy-dotcom:
+    if: github.server_url == 'https://github.com'
+    needs: build-dotcom
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  build-ghes:
+    if: github.server_url != 'https://github.com'
+    runs-on: ${{ fromJSON(vars.RUNNER || '["linux","on-azure","prod"]') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: ${{ env.PAGES_ARTIFACT_PATH }}
+
+  deploy-ghes:
+    if: github.server_url != 'https://github.com'
+    needs: build-ghes
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ${{ fromJSON(vars.RUNNER || '["linux","on-azure","prod"]') }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v2

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submission Received | FDIC</title>
+    <meta name="description" content="Your FDIC support request has been received." />
+    <link rel="canonical" href="https://jflamb.github.io/fdic-epic/submission-confirmation.html" />
+    <meta name="robots" content="noindex" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FDIC Information and Support Center" />
+    <meta property="og:title" content="Submission Received | FDIC" />
+    <meta property="og:description" content="Your FDIC support request has been received." />
+    <meta property="og:url" content="https://jflamb.github.io/fdic-epic/submission-confirmation.html" />
+    <meta property="og:image" content="https://jflamb.github.io/fdic-epic/assets/social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="FDIC Information and Support Center" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Submission Received | FDIC" />
+    <meta name="twitter:description" content="Your FDIC support request has been received." />
+    <link rel="icon" href="https://www.fdic.gov/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Open+Sans:wght@400;600;700&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <fdic-site-header></fdic-site-header>
+
+    <div class="grid-container bg-fdic-white">
+      <div class="ds-region-abovecontent">
+        <fdic-breadcrumb crumbs='[{"label":"Home","href":"https://www.fdic.gov"},{"label":"Information and Support Center","href":"index.html"},{"label":"Report a Problem or Concern","href":"report-problem.html"},{"label":"Submission Confirmation"}]'></fdic-breadcrumb>
+
+        <p class="content-subtitle">Information and Support Center</p>
+        <h1>Submission received</h1>
+        <p class="support-intro">Your request has been submitted to FDIC support.</p>
+      </div>
+
+      <main id="main-content" class="report-layout report-layout--single" aria-label="Submission confirmation">
+        <section class="report-main">
+          <p id="confirm-case" role="status" aria-live="polite"></p>
+          <p id="confirm-submitted" class="report-subcopy"></p>
+
+          <p class="confirm-print-row">
+            <button type="button" id="print-confirmation-btn" class="confirm-print-btn">Print or save as PDF</button>
+          </p>
+
+          <fdic-review-summary dl-id="confirm-summary" id-prefix="confirm" endpoint-label="Assigned routing queue"></fdic-review-summary>
+
+          <section class="legal-note legal-note--compact legal-note--full report-section login-gov-followup" aria-labelledby="login-gov-followup-heading">
+            <h2 id="login-gov-followup-heading">Want to track this case online?</h2>
+            <p>
+              In a future version of this service, you could sign in with Login.gov to securely view case updates,
+              messages, and submission history in one place.
+            </p>
+            <p>
+              This prototype does not connect to Login.gov, so keep your confirmation number for follow-up.
+            </p>
+
+            <div class="login-gov-stub__actions">
+              <button
+                type="button"
+                class="login-gov-button login-gov-button--secondary"
+                aria-expanded="false"
+                aria-controls="login-gov-panel-confirmation"
+                data-login-gov-stub="confirmation"
+              >
+                Sign in with Login.gov
+              </button>
+            </div>
+
+            <div id="login-gov-panel-confirmation" class="login-gov-stub-panel" hidden tabindex="-1">
+              <h3>Login.gov sign-in would start here</h3>
+              <p>
+                In production, the user would leave this page briefly to sign in with Login.gov and then return to view
+                case details and future updates.
+              </p>
+              <p>
+                This prototype does not connect to Login.gov and does not create an authenticated case account.
+              </p>
+              <div class="login-gov-stub-panel__actions">
+                <button type="button" class="login-gov-button login-gov-button--secondary" data-login-gov-dismiss>
+                  Close
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <fdic-step-actions
+            back-href="index.html"
+            back-label="Return to support home"
+            next-id="view-cases-btn"
+            next-label="View my cases"
+            next-href="view-cases.html"
+            actions-label="Confirmation actions"
+          ></fdic-step-actions>
+        </section>
+      </main>
+    </div>
+
+    <fdic-site-footer></fdic-site-footer>
+    <script src="components/index.bundle.js" defer></script>
+    <script type="module" src="login-gov-stub.js"></script>
+    <script type="module" src="support-confirmation.js"></script>
+  </body>
+</html>
