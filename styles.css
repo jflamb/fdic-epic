@@ -1069,6 +1069,14 @@ button,
   letter-spacing: 0.01em;
 }
 
+.support-login-gov-action {
+  margin-top: 0.9rem;
+}
+
+.support-login-gov-action .login-gov-button {
+  width: 100%;
+}
+
 .support-main h2 {
   margin-top: 0.2rem;
   margin-bottom: 0.8rem;

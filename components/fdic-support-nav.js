@@ -25,6 +25,7 @@ export class FDICSupportNav extends HTMLElement {
     ];
 
     const hasDraft = Boolean(sessionStorage.getItem("fdicSupportIntakeLiveDraft"));
+    const showLoginGovAction = activePath !== getPath(ROUTES.viewCases);
 
     /* All values below are hardcoded constants — no user input in the template */
     this.innerHTML = `<nav class="support-sidenav" aria-label="Support navigation">${items
@@ -33,7 +34,13 @@ export class FDICSupportNav extends HTMLElement {
         const draftClass = selected && hasDraft ? " has-draft" : "";
         return `<a class="support-nav-item${selected ? " selected" : ""}${draftClass}" href="${item.href}"${selected ? ' aria-current="page"' : ""}>${item.label}</a>`;
       })
-      .join("")}</nav>`;
+      .join("")}</nav>${
+      showLoginGovAction
+        ? `<div class="support-login-gov-action">
+            <a class="login-gov-button login-gov-button--sidebar" href="${ROUTES.viewCases}">Sign in with Login.gov</a>
+          </div>`
+        : ""
+    }`;
   }
 }
 
