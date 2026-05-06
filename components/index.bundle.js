@@ -310,7 +310,7 @@ class FDICSupportNav extends HTMLElement {
       .join("")}</nav>${
       showLoginGovAction
         ? `<div class="support-login-gov-action">
-            <a class="login-gov-button login-gov-button--sidebar" href="${ROUTES.viewCases}">Sign in with Login.gov</a>
+            <a class="login-gov-button login-gov-button--secondary login-gov-button--sidebar" href="${ROUTES.viewCases}">Sign in with Login.gov</a>
           </div>`
         : ""
     }`;
