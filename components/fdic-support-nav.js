@@ -1,8 +1,13 @@
 import { ROUTES } from "./routes.js";
 
+const LOGIN_GOV_PROTOTYPE_AUTH_KEY = "fdicLoginGovPrototypeSignedIn";
+
 export class FDICSupportNav extends HTMLElement {
   connectedCallback() {
-    if (this.innerHTML.trim()) return;
+    this.render();
+  }
+
+  render() {
     const active = this.getAttribute("active") || "";
     const getPath = (href) => {
       if (!href) return "";
@@ -25,8 +30,7 @@ export class FDICSupportNav extends HTMLElement {
     ];
 
     const hasDraft = Boolean(sessionStorage.getItem("fdicSupportIntakeLiveDraft"));
-    const showLoginGovAction = activePath !== getPath(ROUTES.viewCases);
-
+    const isSignedIn = sessionStorage.getItem(LOGIN_GOV_PROTOTYPE_AUTH_KEY) === "true";
     /* All values below are hardcoded constants — no user input in the template */
     this.innerHTML = `<nav class="support-sidenav" aria-label="Support navigation">${items
       .map((item) => {
@@ -35,11 +39,23 @@ export class FDICSupportNav extends HTMLElement {
         return `<a class="support-nav-item${selected ? " selected" : ""}${draftClass}" href="${item.href}"${selected ? ' aria-current="page"' : ""}>${item.label}</a>`;
       })
       .join("")}</nav>${
-      showLoginGovAction
+      isSignedIn
         ? `<div class="support-login-gov-action">
-            <a class="login-gov-button login-gov-button--secondary login-gov-button--sidebar" href="${ROUTES.viewCases}">Sign in with Login.gov</a>
+            <button type="button" class="support-login-gov-action__button" data-login-gov-signout>Sign out</button>
           </div>`
-        : ""
+        : activePath !== getPath(ROUTES.viewCases)
+          ? `<div class="support-login-gov-action">
+            <button
+              type="button"
+              class="login-gov-button login-gov-button--secondary login-gov-button--sidebar"
+              aria-expanded="false"
+              aria-controls="login-gov-dialog-shared"
+              data-login-gov-stub="sidebar"
+            >
+              Sign in with Login.gov
+            </button>
+          </div>`
+          : ""
     }`;
   }
 }

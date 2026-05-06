@@ -78,6 +78,13 @@ body {
   background: var(--fdic-white);
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
 h1,
 h2,
 h3 {
@@ -1077,6 +1084,48 @@ button,
   width: 100%;
 }
 
+.support-login-gov-action__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.75rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--fdic-blue-700);
+  border-radius: 0.25rem;
+  background: #fff;
+  color: var(--fdic-blue-800);
+  cursor: pointer;
+}
+
+.support-login-gov-action__button:hover {
+  background: #f5f8fb;
+  color: #0d2440;
+}
+
+.support-login-gov-action__button:focus-visible {
+  outline: 3px solid var(--fdic-border-input-focus, #38b6ff);
+  outline-offset: 2px;
+}
+
+.support-login-gov-action .login-gov-button--sidebar {
+  min-height: 2.75rem;
+  padding: 0.625rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.support-login-gov-action .login-gov-button--sidebar::before {
+  width: 1rem;
+  height: 1.3rem;
+}
+
 .support-main h2 {
   margin-top: 0.2rem;
   margin-bottom: 0.8rem;
@@ -1429,6 +1478,15 @@ button,
 
 .report-error-summary a {
   color: #7d1020;
+}
+
+.report-success-summary {
+  border-left: 4px solid #1e5f3f;
+  background: #f3fbf6;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 1rem;
+  color: var(--fdic-gray-800);
+  font-weight: 700;
 }
 
 .report-section {
@@ -3070,7 +3128,7 @@ fdic-choice-group {
   border: 1px solid #112e51;
   background: #112e51;
   color: #fff;
-  font-family: "Source Sans Pro", "Open Sans", Arial, sans-serif;
+  font-family: inherit;
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
@@ -3127,27 +3185,47 @@ fdic-choice-group {
   color: #091b30;
 }
 
-.login-gov-stub-panel {
-  max-width: 68ch;
-  margin: 0.25rem 0 0;
-  padding: 1rem 1rem 0.95rem;
-  border: 1px solid #d7e3ef;
-  background: #f8fbff;
+.has-login-gov-modal {
+  overflow: hidden;
 }
 
-.login-gov-stub-panel h3 {
-  margin: 0 0 0.4rem;
+.login-gov-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(17, 46, 81, 0.42);
+}
+
+.login-gov-modal__panel {
+  width: min(100%, 34rem);
+  padding: 1.25rem;
+  border: 1px solid #cfdfe9;
+  border-radius: 0.25rem;
+  background: #fff;
+  box-shadow: 0 1.25rem 2.5rem rgba(17, 46, 81, 0.24);
+}
+
+.login-gov-modal__panel h2 {
+  margin: 0 0 0.6rem;
   font-family: "Source Sans Pro", "Open Sans", Arial, sans-serif;
-  font-size: 1rem;
-  line-height: 1.3;
+  font-size: 1.25rem;
+  line-height: 1.25;
 }
 
-.login-gov-stub-panel p {
-  max-width: none;
+.login-gov-modal__panel p {
+  margin: 0 0 0.65rem;
+  color: var(--fdic-gray-700);
+  line-height: 1.5;
 }
 
-.login-gov-stub-panel__actions {
-  margin-top: 0.9rem;
+.login-gov-modal__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
 }
 
 /* --- Bank selector demo --- */

@@ -44,90 +44,63 @@
         </aside>
 
         <section class="report-main">
-          <p class="support-subcopy">Cases are stored in this browser for prototype review. Sensitive personal details are not stored in case history.</p>
+          <div id="login-gov-auth-status" class="report-success-summary" role="status" aria-live="polite" hidden></div>
 
-          <section class="legal-note legal-note--full report-section login-gov-stub" aria-labelledby="login-gov-heading">
+          <section class="legal-note legal-note--full report-section login-gov-stub" aria-labelledby="login-gov-heading" data-login-gov-signed-out>
             <h2 id="login-gov-heading">Sign in to access saved cases</h2>
+            <p>Use Login.gov to securely access cases linked to your account.</p>
             <p>
-              In a live version of this service, you would sign in with Login.gov to securely view and manage your FDIC
-              cases across devices.
+              After signing in, you can review submitted requests, check current status, and find follow-up information
+              in one place.
             </p>
-            <p>
-              This prototype does not connect to Login.gov. The case list below shows cases saved in this browser only.
-            </p>
-
             <div class="login-gov-stub__actions">
               <button
                 type="button"
                 class="login-gov-button"
                 aria-describedby="login-gov-help"
                 aria-expanded="false"
-                aria-controls="login-gov-panel-cases"
+                aria-controls="login-gov-dialog-cases"
                 data-login-gov-stub="view-cases"
               >
                 Sign in with Login.gov
               </button>
             </div>
-
             <p id="login-gov-help" class="report-subcopy report-subcopy--tight">
-              Prototype only. In production, this button would start secure sign-in with Login.gov.
+              You will leave this page briefly to sign in with Login.gov, then return to My Cases.
             </p>
-
-            <div id="login-gov-panel-cases" class="login-gov-stub-panel" hidden tabindex="-1">
-              <h3>Login.gov sign-in would start here</h3>
-              <p>
-                Selecting this button would redirect the user to Login.gov to sign in or create an account, then return
-                them to My Cases.
-              </p>
-              <p>
-                This prototype does not collect credentials, transmit account information, or connect to Login.gov.
-              </p>
-              <div class="login-gov-stub-panel__actions">
-                <button type="button" class="login-gov-button login-gov-button--secondary" data-login-gov-dismiss>
-                  Close
-                </button>
-              </div>
-            </div>
-
-            <details class="legal-note-disclosure login-gov-disclosure">
-              <summary>How Login.gov would be used</summary>
-              <div class="legal-note-disclosure__body">
-                <p>Authentication would begin after selecting the sign-in button.</p>
-                <p>After successful sign-in, the user would return here to view identity-linked case history and updates.</p>
-                <p>This prototype does not transmit credentials or connect to Login.gov services.</p>
-              </div>
-            </details>
           </section>
 
-          <div class="cases-controls">
-            <label for="cases-sort">Sort by recency</label>
-            <select id="cases-sort" class="report-select">
-              <option value="newest">Newest first</option>
-              <option value="oldest">Oldest first</option>
-            </select>
-          </div>
+          <div id="cases-region" data-login-gov-cases-region hidden>
+            <div class="cases-controls">
+              <label for="cases-sort">Sort by recency</label>
+              <select id="cases-sort" class="report-select">
+                <option value="newest">Newest first</option>
+                <option value="oldest">Oldest first</option>
+              </select>
+            </div>
 
-          <div id="cases-empty" class="report-error-summary" hidden>
-            <p>You have no submitted cases yet.</p>
-            <ul>
-              <li><a href="index.html">Start a new request</a></li>
-              <li><a href="faq.html">Browse frequently asked questions</a></li>
-            </ul>
-          </div>
+            <div id="cases-empty" class="report-error-summary" hidden>
+              <p>You have no submitted cases yet.</p>
+              <ul>
+                <li><a href="index.html">Start a new request</a></li>
+                <li><a href="faq.html">Browse frequently asked questions</a></li>
+              </ul>
+            </div>
 
-          <table id="cases-table" class="cases-table" hidden>
-            <caption class="visually-hidden">Submitted support requests and their current status</caption>
-            <thead>
-              <tr>
-                <th scope="col">Case</th>
-                <th scope="col">Submitted</th>
-                <th scope="col">Request type</th>
-                <th scope="col">Topic</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody id="cases-tbody"></tbody>
-          </table>
+            <table id="cases-table" class="cases-table" hidden>
+              <caption class="visually-hidden">Submitted support requests and their current status</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Case</th>
+                  <th scope="col">Submitted</th>
+                  <th scope="col">Request type</th>
+                  <th scope="col">Topic</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody id="cases-tbody"></tbody>
+            </table>
+          </div>
 
           <fdic-step-actions
             back-href="index.html"
@@ -141,9 +114,26 @@
       </main>
     </div>
 
+    <div id="login-gov-dialog-cases" class="login-gov-modal" role="dialog" aria-modal="true" aria-labelledby="login-gov-dialog-cases-title" hidden tabindex="-1" data-login-gov-modal>
+      <div class="login-gov-modal__panel">
+        <h2 id="login-gov-dialog-cases-title">Prototype sign-in preview</h2>
+        <p>
+          In production, this button would redirect you to Login.gov to sign in or create an account, then return you to
+          My Cases.
+        </p>
+        <p>
+          This prototype does not collect credentials, transmit account information, or connect to Login.gov.
+        </p>
+        <div class="login-gov-modal__actions">
+          <button type="button" class="login-gov-button" data-login-gov-simulate>Simulate signing in</button>
+          <button type="button" class="confirm-print-btn" data-login-gov-dismiss>Close</button>
+        </div>
+      </div>
+    </div>
+
     <fdic-site-footer></fdic-site-footer>
-    <script src="components/index.bundle.js?v=sidebar-login-outline-20260506" defer></script>
-    <script type="module" src="login-gov-stub.js"></script>
+    <script src="components/index.bundle.js?v=sidebar-signout-20260506" defer></script>
+    <script type="module" src="login-gov-stub.js?v=auth-my-cases-signin-20260506"></script>
     <script type="module" src="support-cases.js"></script>
   </body>
 </html>
