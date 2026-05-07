@@ -959,7 +959,7 @@ function renderIntentGroup() {
         {
           value: "ask",
           title: "Ask a question or get guidance",
-          detail: "For help understanding FDIC services, deposit insurance, or requirements.",
+          detail: "For help with deposit insurance coverage, as well as other FDIC services or requirements.",
         },
         {
           value: "dir",
