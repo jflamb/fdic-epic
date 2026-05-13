@@ -348,7 +348,32 @@ if (!customElements.get("fdic-support-nav")) customElements.define("fdic-support
 /* import handled */
 const ANIM_DURATION = 200;
 const ANIM_EASING = "ease";
+const TOPIC_LABEL_ALIASES = new Map([
+  ["About FDIC", "About the FDIC"],
+  ["Understanding Deposit Insurance", "Deposit Insurance"],
+  ["What's Covered?", "Covered Products"],
+  ["Are My Accounts Insured?", "Account Coverage"],
+  ["Is My Bank Insured?", "Insured Banks"],
+  ["Information About My Bank", "Bank Information"],
+  ["When a Bank Fails", "Bank Failures"],
+  ["Bank Failures", "Failed Bank Basics"],
+  ["Lien Releases from Failed Banks", "Failed Bank Lien Releases"],
+  ["Institution & Asset Sales", "Institution and Asset Sales"],
+  ["Deposit Tips", "Deposit Account Tips"],
+  ["More About Loans", "Loans"],
+  ["Loan Tips", "Loan Basics"],
+  ["Overdraft Lines of Credit", "Overdraft Credit Lines"],
+  ["Special Programs", "Card Special Programs"],
+  ["Financial Disability Assistance", "Disability and Military Assistance"],
+  ["Financial Institution Letters (FILS)", "Financial Institution Letters"],
+  ["Industry Information and Data Tools", "Bank Data and Tools"],
+  ["Using the Information and Support Center", "Using the Support Center"],
+]);
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function getTopicDisplayLabel(topic) {
+  return TOPIC_LABEL_ALIASES.get(topic?.label) || topic?.label || "";
+}
 
 class FDICFAQList extends HTMLElement {
   constructor() {
@@ -386,9 +411,27 @@ class FDICFAQList extends HTMLElement {
     return escaped.replace(pattern, "<mark>$1</mark>");
   }
 
-  renderArticles(articles, query = "") {
+  renderArticles(articles, query = "", selectedTopicId = "__all__") {
+    const previouslyOpenIds = new Set(
+      Array.from(this.querySelectorAll(".faq-item details[open]"))
+        .map((details) => details.closest(".faq-item")?.id)
+        .filter(Boolean)
+    );
+
     if (!Array.isArray(articles) || !articles.length) {
       this.activeFaqItemId = null;
+      const hasQuery = Boolean(query && query.trim());
+      const hasTopic = selectedTopicId && selectedTopicId !== "__all__";
+      const recoveryActions = [];
+      if (hasQuery) {
+        recoveryActions.push('<button class="empty-state-action" type="button" data-empty-action="clear-search">Clear search</button>');
+      }
+      if (hasTopic) {
+        recoveryActions.push('<button class="empty-state-action" type="button" data-empty-action="clear-topic">Clear topic</button>');
+      }
+      if (hasQuery || hasTopic) {
+        recoveryActions.push('<button class="empty-state-action" type="button" data-empty-action="clear-all">Browse all FAQs</button>');
+      }
       this.innerHTML = `
         <div class="empty-state">
           <div class="empty-state-icon" aria-hidden="true">
@@ -398,9 +441,10 @@ class FDICFAQList extends HTMLElement {
               <line x1="8" y1="11" x2="14" y2="11"/>
             </svg>
           </div>
-          <p class="empty-state-heading">No matching FAQs</p>
-          <p class="empty-state-body">Try a different keyword or choose a different topic.</p>
-          <p class="empty-state-body">Still can't find what you need? <a href="index.html">Submit a request</a> through the Information and Support Center.</p>
+          <p class="empty-state-heading">No FAQs match these filters</p>
+          <p class="empty-state-body">Remove a filter or try a broader search term.</p>
+          ${recoveryActions.length ? `<div class="empty-state-actions">${recoveryActions.join("")}</div>` : ""}
+          <p class="empty-state-body empty-state-secondary">Still can't find what you need? <a href="index.html">Submit a request</a> through the Information and Support Center.</p>
         </div>
       `;
       return;
@@ -410,6 +454,21 @@ class FDICFAQList extends HTMLElement {
       .map((article) => {
         const safeId = `faq-${escapeHtml(article.urlName)}`;
         const question = stripQuestionPrefix(article.question);
+        const topic = Array.isArray(article.topics) ? article.topics[0] : null;
+        const topicLabel = getTopicDisplayLabel(topic);
+        const topicAction = topic ? `
+                    <span class="answer-topic">
+                      Topic:
+                      <button
+                        class="topic-filter-btn"
+                        type="button"
+                        data-topic-id="${escapeHtml(topic.id)}"
+                        aria-pressed="${selectedTopicId === topic.id}"
+                      >
+                        ${escapeHtml(topicLabel)}
+                      </button>
+                    </span>
+        ` : "";
 
         const highlighted = this.highlightQuery(question, query);
         return `
@@ -425,6 +484,7 @@ class FDICFAQList extends HTMLElement {
                 <div class="answer">
                   ${article.answerHtml || ""}
                   <div class="answer-actions">
+                    ${topicAction}
                     <button
                       class="copy-link-btn"
                       type="button"
@@ -443,6 +503,10 @@ class FDICFAQList extends HTMLElement {
       .join("");
 
     this.innerHTML = `<ul class="faq-list-items" role="list">${listItems}</ul>`;
+    for (const itemId of previouslyOpenIds) {
+      const details = this.querySelector(`#${escapeCssSelector(itemId)} details`);
+      if (details instanceof HTMLDetailsElement) details.open = true;
+    }
     this.setupKeyboardNavigation();
     this.openByHash(window.location.hash);
   }
@@ -583,6 +647,31 @@ class FDICFAQList extends HTMLElement {
     const copyButton = target.closest(".copy-link-btn");
     if (copyButton instanceof HTMLButtonElement) {
       this.handleCopyLink(copyButton);
+      return;
+    }
+
+    const topicButton = target.closest(".topic-filter-btn");
+    if (topicButton instanceof HTMLButtonElement) {
+      const topicId = topicButton.dataset.topicId;
+      if (topicId) {
+        this.dispatchEvent(new CustomEvent("faq-topic-selected", {
+          bubbles: true,
+          detail: { topicId },
+        }));
+      }
+      return;
+    }
+
+    const emptyStateAction = target.closest(".empty-state-action");
+    if (emptyStateAction instanceof HTMLButtonElement) {
+      const action = emptyStateAction.dataset.emptyAction;
+      if (action === "clear-search") {
+        this.dispatchEvent(new CustomEvent("faq-clear-search", { bubbles: true }));
+      } else if (action === "clear-topic") {
+        this.dispatchEvent(new CustomEvent("faq-clear-topic", { bubbles: true }));
+      } else if (action === "clear-all") {
+        this.dispatchEvent(new CustomEvent("faq-clear-all", { bubbles: true }));
+      }
       return;
     }
 

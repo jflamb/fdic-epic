@@ -4,14 +4,12 @@ const state = {
   data: null,
   query: "",
   selectedTopicId: "__all__",
-  activeTreeItemId: "__all__",
   allTopics: [],
   searchDebounceId: null,
 };
 
 const SEARCH_DEBOUNCE_MS = 200;
-const TREE_BASE_INDENT_PX = 16;
-const TREE_DEPTH_INDENT_PX = 16;
+const POPULAR_TOPIC_LIMIT = 5;
 const SEARCH_SCORE_WEIGHTS = {
   questionToken: 7,
   topicToken: 5,
@@ -20,13 +18,35 @@ const SEARCH_SCORE_WEIGHTS = {
   questionExact: 12,
   topicExact: 8,
 };
-
+const TOPIC_LABEL_ALIASES = new Map([
+  ["About FDIC", "About the FDIC"],
+  ["Understanding Deposit Insurance", "Deposit Insurance"],
+  ["What's Covered?", "Covered Products"],
+  ["Are My Accounts Insured?", "Account Coverage"],
+  ["Is My Bank Insured?", "Insured Banks"],
+  ["Information About My Bank", "Bank Information"],
+  ["When a Bank Fails", "Bank Failures"],
+  ["Bank Failures", "Failed Bank Basics"],
+  ["Lien Releases from Failed Banks", "Failed Bank Lien Releases"],
+  ["Institution & Asset Sales", "Institution and Asset Sales"],
+  ["Deposit Tips", "Deposit Account Tips"],
+  ["More About Loans", "Loans"],
+  ["Loan Tips", "Loan Basics"],
+  ["Overdraft Lines of Credit", "Overdraft Credit Lines"],
+  ["Special Programs", "Card Special Programs"],
+  ["Financial Disability Assistance", "Disability and Military Assistance"],
+  ["Financial Institution Letters (FILS)", "Financial Institution Letters"],
+  ["Industry Information and Data Tools", "Bank Data and Tools"],
+  ["Using the Information and Support Center", "Using the Support Center"],
+]);
 const els = {
   search: document.getElementById("faq-search"),
   searchInlineClear: document.getElementById("faq-search-inline-clear"),
-  clear: document.getElementById("clear-search"),
-  resultCount: document.getElementById("result-count"),
-  categoryTree: document.getElementById("category-tree"),
+  searchScope: document.getElementById("faq-search-scope"),
+  topicFilterPanel: document.getElementById("topic-filter-panel"),
+  popularTopicList: document.getElementById("popular-topic-list"),
+  activeFilterSummary: document.getElementById("active-filter-summary"),
+  resultSummary: document.getElementById("result-summary"),
   faqList: document.getElementById("faq-list"),
 };
 
@@ -37,22 +57,20 @@ async function init() {
     const response = await fetch("data.json");
     state.data = await response.json();
     state.allTopics = flattenTopics(state.data.categories);
-    const params = new URLSearchParams(window.location.search);
-    const initialQuery = params.get("q");
-    if (initialQuery) {
-      state.query = initialQuery.trim();
-      els.search.value = state.query;
-    }
+    applyUrlStateToFilters();
 
     wireEvents();
     updateInlineClearVisibility();
+    updateTopicFilterPanel();
     render();
     if (typeof els.faqList.openByHash === "function") {
       els.faqList.openByHash(window.location.hash);
     }
   } catch (error) {
     console.error(error);
-    els.resultCount.textContent = "Unable to load FAQ content.";
+    els.activeFilterSummary.hidden = false;
+    els.activeFilterSummary.textContent = "Unable to load FAQ content.";
+    els.resultSummary.textContent = "";
   }
 }
 
@@ -64,24 +82,14 @@ function wireEvents() {
     updateInlineClearVisibility();
     state.searchDebounceId = setTimeout(() => {
       state.query = els.search.value.trim();
+      updateTopicFilterPanel();
+      syncUrlState();
       render();
     }, SEARCH_DEBOUNCE_MS);
   });
 
   els.searchInlineClear.addEventListener("click", () => {
-    els.search.value = "";
-    state.query = "";
-    updateInlineClearVisibility();
-    render();
-    els.search.focus();
-  });
-
-  els.clear.addEventListener("click", () => {
-    els.search.value = "";
-    state.query = "";
-    updateInlineClearVisibility();
-    render();
-    els.search.focus();
+    clearSearch({ focusTarget: "search" });
   });
 
   window.addEventListener("hashchange", () => {
@@ -89,11 +97,124 @@ function wireEvents() {
       els.faqList.openByHash(window.location.hash);
     }
   });
-  els.categoryTree.addEventListener("keydown", handleCategoryTreeKeydown);
+
+  window.addEventListener("popstate", () => {
+    applyUrlStateToFilters();
+    updateInlineClearVisibility();
+    updateTopicFilterPanel();
+    render();
+  });
+
+  els.popularTopicList.addEventListener("click", (event) => {
+    const button = event.target instanceof HTMLElement ? event.target.closest("[data-topic-id]") : null;
+    if (!(button instanceof HTMLButtonElement)) return;
+    selectTopic(button.dataset.topicId || "__all__", { focusTarget: "summary" });
+  });
+
+  els.activeFilterSummary.addEventListener("click", (event) => {
+    const button = event.target instanceof HTMLElement ? event.target.closest("button") : null;
+    if (!(button instanceof HTMLButtonElement)) return;
+    if (button.hasAttribute("data-clear-all")) {
+      clearAllFilters({ focusTarget: "search" });
+      return;
+    }
+    if (button.hasAttribute("data-clear-topic")) {
+      selectTopic("__all__", { focusTarget: "summary" });
+      return;
+    }
+    if (button.hasAttribute("data-clear-search")) {
+      clearSearch({ focusTarget: state.selectedTopicId === "__all__" ? "search" : "summary" });
+    }
+  });
+
+  els.faqList.addEventListener("faq-topic-selected", (event) => {
+    const topicId = event.detail?.topicId;
+    if (!topicId) return;
+    selectTopic(topicId, { focusTarget: "summary" });
+  });
+
+  els.faqList.addEventListener("faq-clear-search", () => {
+    clearSearch({ focusTarget: state.selectedTopicId === "__all__" ? "search" : "summary" });
+  });
+
+  els.faqList.addEventListener("faq-clear-topic", () => {
+    selectTopic("__all__", { focusTarget: "summary" });
+  });
+
+  els.faqList.addEventListener("faq-clear-all", () => {
+    clearAllFilters({ focusTarget: "search" });
+  });
 }
 
 function updateInlineClearVisibility() {
   els.searchInlineClear.hidden = !els.search.value;
+}
+
+function clearSearch(options = {}) {
+  els.search.value = "";
+  state.query = "";
+  updateInlineClearVisibility();
+  updateTopicFilterPanel();
+  syncUrlState();
+  render();
+
+  if (options.focusTarget === "summary" && !els.activeFilterSummary.hidden) {
+    els.activeFilterSummary.focus();
+    return;
+  }
+
+  els.search.focus();
+}
+
+function clearAllFilters(options = {}) {
+  els.search.value = "";
+  state.query = "";
+  state.selectedTopicId = "__all__";
+  updateInlineClearVisibility();
+  updateTopicFilterPanel();
+  syncUrlState();
+  render();
+
+  if (options.focusTarget === "search") {
+    els.search.focus();
+  }
+}
+
+function updateTopicFilterPanel() {
+  const hasActiveFilter = Boolean(state.query.trim()) || state.selectedTopicId !== "__all__";
+  els.topicFilterPanel.open = !hasActiveFilter;
+}
+
+function applyUrlStateToFilters() {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get("q") || "";
+  const topicId = params.get("topic") || "__all__";
+  const topicsById = new Map(state.allTopics.map((topic) => [topic.id, topic]));
+
+  state.query = query.trim();
+  els.search.value = state.query;
+  state.selectedTopicId = topicsById.has(topicId) ? topicId : "__all__";
+}
+
+function syncUrlState() {
+  const params = new URLSearchParams(window.location.search);
+  if (state.query) {
+    params.set("q", state.query);
+  } else {
+    params.delete("q");
+  }
+
+  if (state.selectedTopicId !== "__all__") {
+    params.set("topic", state.selectedTopicId);
+  } else {
+    params.delete("topic");
+  }
+
+  const queryString = params.toString();
+  const nextUrl = `${window.location.pathname}${queryString ? `?${queryString}` : ""}${window.location.hash}`;
+  if (nextUrl !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+    window.history.replaceState(null, "", nextUrl);
+  }
 }
 
 function flattenTopics(items, depth = 0, parentId = null, list = []) {
@@ -160,7 +281,9 @@ function tokenizeQuery(query) {
 }
 
 function getArticleSearchData(article) {
-  const topicText = article.topics.map((topic) => topic.label).join(" ");
+  const topicText = article.topics
+    .map((topic) => `${topic.label} ${getTopicDisplayLabel(topic)}`)
+    .join(" ");
   return {
     question: normalizeText(article.question),
     topicText: normalizeText(topicText),
@@ -222,19 +345,14 @@ function filterArticles() {
   return ranked.map((entry) => entry.article);
 }
 
-function topicCountsForQuery() {
+function topicCountsForAllArticles() {
   const directArticleIdsByTopic = new Map();
-  const query = state.query;
-  const tokens = tokenizeQuery(query);
-  const normalizedQuery = normalizeText(query);
   const { childrenById } = buildTopicIndex();
-  const matchingArticleIds = new Set();
+  const articleIds = new Set();
 
   for (const article of state.data.articles) {
-    const { matches } = evaluateQueryMatch(article, tokens, normalizedQuery);
-    if (!matches) continue;
     const articleId = article.id || article.urlName || article.question;
-    matchingArticleIds.add(articleId);
+    articleIds.add(articleId);
 
     for (const topic of article.topics) {
       if (!directArticleIdsByTopic.has(topic.id)) {
@@ -264,92 +382,70 @@ function topicCountsForQuery() {
 
   return {
     counts: displayCounts,
-    totalCount: matchingArticleIds.size,
+    totalCount: articleIds.size,
   };
 }
 
 function render() {
   const filteredArticles = filterArticles();
-  renderResultCount(filteredArticles.length);
-  renderCategoryTree(topicCountsForQuery());
+  renderSearchScope();
+  renderPopularTopics(topicCountsForAllArticles());
+  renderActiveFilterSummary();
+  renderResultSummary(filteredArticles.length);
   renderFaqList(filteredArticles);
 }
 
-function renderResultCount(count) {
-  const total = state.data.articles.length;
-  els.resultCount.textContent = `${count} of ${total} FAQs`;
+function renderSearchScope() {
+  const topic = getSelectedTopic();
+  if (!topic) {
+    if (!state.query.trim()) {
+      els.searchScope.hidden = true;
+      els.searchScope.textContent = "";
+      return;
+    }
+    els.searchScope.hidden = false;
+    els.searchScope.textContent = "Open Filter by topic to narrow these results.";
+    return;
+  }
+
+  els.searchScope.hidden = false;
+  els.searchScope.textContent = state.query.trim()
+    ? `Searching within ${topic.displayLabel}.`
+    : `Search within ${topic.displayLabel}, or clear the topic to search all FAQs.`;
 }
 
-function renderCategoryTree(countData) {
+function renderPopularTopics(countData) {
   const counts = countData?.counts || new Map();
-  const allTopicsCount = countData?.totalCount ?? state.data.articles.length;
+  const topLevelTopics = state.allTopics
+    .filter((topic) => !topic.parentId)
+    .map((topic) => ({
+      ...topic,
+      count: counts.get(topic.id) || 0,
+    }))
+    .filter((topic) => topic.count > 0)
+    .sort((a, b) => {
+      if (b.count !== a.count) return b.count - a.count;
+      return a.label.localeCompare(b.label);
+    })
+    .slice(0, POPULAR_TOPIC_LIMIT);
+
   const rows = [];
-  const topicsById = new Map(state.allTopics.map((topic) => [topic.id, topic]));
-  const expandedRootTopicId = getExpandedRootTopicId(topicsById);
 
-  rows.push(`
-    <button
-      class="category-row ${state.selectedTopicId === "__all__" ? "selected" : ""}"
-      type="button"
-      data-topic-id="__all__"
-      data-depth="0"
-      role="option"
-      aria-selected="${state.selectedTopicId === "__all__"}"
-      tabindex="${state.activeTreeItemId === "__all__" ? "0" : "-1"}"
-    >
-      <span>All topics</span>
-      <span class="category-count">${allTopicsCount}</span>
-    </button>
-  `);
-
-  for (const topic of state.allTopics) {
-    const count = counts.get(topic.id) || 0;
+  for (const topic of topLevelTopics) {
     const isSelected = state.selectedTopicId === topic.id;
-    const isSubtopic = topic.depth > 0;
-    const topicRootId = isSubtopic ? getRootTopicId(topic.id, topicsById) : topic.id;
-    const isInExpandedBranch = Boolean(expandedRootTopicId && topicRootId === expandedRootTopicId);
-
-    if (isSubtopic && !isInExpandedBranch && !isSelected) {
-      continue;
-    }
-    if (count === 0 && !isSelected && allTopicsCount < state.data.articles.length) {
-      continue;
-    }
-    if (isSubtopic && count === 0 && !isSelected) {
-      continue;
-    }
-    const indent = topic.depth * TREE_DEPTH_INDENT_PX;
-
     rows.push(`
       <button
-        class="category-row ${isSelected ? "selected" : ""}"
+        class="popular-topic-chip ${isSelected ? "selected" : ""}"
         type="button"
-        style="padding-left:${TREE_BASE_INDENT_PX + indent}px"
         data-topic-id="${topic.id}"
-        data-depth="${topic.depth}"
-        role="option"
-        aria-selected="${isSelected}"
-        tabindex="${state.activeTreeItemId === topic.id ? "0" : "-1"}"
+        aria-pressed="${isSelected}"
       >
-        <span>${escapeHtml(topic.label)}</span>
-        <span class="category-count">${count}</span>
+        <span>${escapeHtml(getTopicDisplayLabel(topic))}</span>
       </button>
     `);
   }
 
-  els.categoryTree.innerHTML = rows.join("");
-
-  for (const button of els.categoryTree.querySelectorAll(".category-row")) {
-    button.addEventListener("click", () => {
-      const topicId = button.dataset.topicId || "__all__";
-      selectTopic(topicId, false);
-    });
-  }
-}
-
-function getExpandedRootTopicId(topicsById) {
-  if (state.selectedTopicId === "__all__") return null;
-  return getRootTopicId(state.selectedTopicId, topicsById);
+  els.popularTopicList.innerHTML = rows.join("");
 }
 
 function getRootTopicId(topicId, topicsById) {
@@ -367,72 +463,103 @@ function getRootTopicId(topicId, topicsById) {
   return null;
 }
 
-function handleCategoryTreeKeydown(event) {
-  const target = event.target;
-  if (!(target instanceof HTMLElement) || !target.classList.contains("category-row")) return;
+function renderActiveFilterSummary() {
+  const topic = getSelectedTopic();
+  const query = state.query.trim();
 
-  const buttons = getTreeButtons();
-  if (!buttons.length) return;
-
-  const currentIndex = buttons.indexOf(target);
-  if (currentIndex < 0) return;
-
-  const key = event.key;
-
-  if (key === "ArrowDown") {
-    event.preventDefault();
-    focusTreeButtonByIndex(buttons, Math.min(currentIndex + 1, buttons.length - 1));
+  if (!topic && !query) {
+    els.activeFilterSummary.hidden = true;
+    els.activeFilterSummary.innerHTML = "";
     return;
   }
 
-  if (key === "ArrowUp") {
-    event.preventDefault();
-    focusTreeButtonByIndex(buttons, Math.max(currentIndex - 1, 0));
-    return;
+  const filters = [];
+  if (topic) {
+    filters.push(`
+      <span class="active-filter-pill">
+        <span>Topic: <strong>${escapeHtml(topic.displayLabel)}</strong></span>
+        <button type="button" data-clear-topic aria-label="Clear topic filter">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </span>
+    `);
   }
 
-  if (key === "Home") {
-    event.preventDefault();
-    focusTreeButtonByIndex(buttons, 0);
-    return;
+  if (query) {
+    filters.push(`
+      <span class="active-filter-pill">
+        <span>Search: <strong>&ldquo;${escapeHtml(query)}&rdquo;</strong></span>
+        <button type="button" data-clear-search aria-label="Clear search filter">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </span>
+    `);
   }
 
-  if (key === "End") {
-    event.preventDefault();
-    focusTreeButtonByIndex(buttons, buttons.length - 1);
-    return;
+  if (topic || query) {
+    filters.push(`
+      <button class="clear-all-filters" type="button" data-clear-all>Clear all filters</button>
+    `);
   }
 
-  if (key === "Enter" || key === " ") {
-    event.preventDefault();
-    selectTopic(target.dataset.topicId || "__all__", true);
-  }
+  els.activeFilterSummary.hidden = false;
+  els.activeFilterSummary.innerHTML = filters.join("");
 }
 
-function selectTopic(topicId, restoreFocus) {
+function renderResultSummary(filteredCount) {
+  const topic = getSelectedTopic();
+  const query = state.query.trim();
+  const faqLabel = filteredCount === 1 ? "FAQ" : "FAQs";
+  const sortText = filteredCount > 0 && query ? " Sorted by relevance." : "";
+
+  if (topic && query) {
+    els.resultSummary.textContent = `Showing ${filteredCount} ${faqLabel} matching "${query}" in ${topic.displayLabel}.${sortText}`;
+    return;
+  }
+
+  if (topic) {
+    els.resultSummary.textContent = `Showing ${filteredCount} ${faqLabel} in ${topic.displayLabel}.${sortText}`;
+    return;
+  }
+
+  if (query) {
+    els.resultSummary.textContent = `Showing ${filteredCount} ${faqLabel} matching "${query}".${sortText}`;
+    return;
+  }
+
+  els.resultSummary.textContent = `Showing ${filteredCount} ${faqLabel}.${sortText}`;
+}
+
+function getSelectedTopic() {
+  if (state.selectedTopicId === "__all__") return null;
+  const topicsById = new Map(state.allTopics.map((topic) => [topic.id, topic]));
+  const topic = topicsById.get(state.selectedTopicId);
+  return topic ? { ...topic, displayLabel: getTopicDisplayLabel(topic) } : null;
+}
+
+function getTopicDisplayLabel(topic) {
+  return TOPIC_LABEL_ALIASES.get(topic?.label) || topic?.label || "";
+}
+
+function selectTopic(topicId, options = {}) {
   state.selectedTopicId = topicId;
-  state.activeTreeItemId = topicId;
+  updateTopicFilterPanel();
+  syncUrlState();
   render();
 
-  if (!restoreFocus) return;
-  const next = els.categoryTree.querySelector(`.category-row[data-topic-id="${cssEscape(topicId)}"]`);
-  if (next instanceof HTMLElement) {
-    next.focus();
+  if (options.restoreFocus) {
+    const next = els.popularTopicList.querySelector(`[data-topic-id="${cssEscape(topicId)}"]`);
+    if (next instanceof HTMLElement) {
+      next.focus();
+    }
+    return;
   }
-}
 
-function getTreeButtons() {
-  return Array.from(els.categoryTree.querySelectorAll(".category-row"));
-}
-
-function focusTreeButtonByIndex(buttons, index) {
-  const button = buttons[index];
-  if (!button) return;
-  state.activeTreeItemId = button.dataset.topicId || "__all__";
-  for (const candidate of buttons) {
-    candidate.tabIndex = candidate === button ? 0 : -1;
+  if (options.focusTarget === "summary") {
+    const target = els.activeFilterSummary.hidden ? els.search : els.activeFilterSummary;
+    target.focus();
   }
-  button.focus();
+
 }
 
 function cssEscape(value) {
@@ -444,7 +571,7 @@ function cssEscape(value) {
 
 function renderFaqList(articles) {
   if (typeof els.faqList.renderArticles === "function") {
-    els.faqList.renderArticles(articles, state.query);
+    els.faqList.renderArticles(articles, state.query, state.selectedTopicId);
     return;
   }
 

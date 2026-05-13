@@ -39,22 +39,32 @@
       </div>
 
       <main id="main-content" class="report-layout" aria-label="Frequently asked questions">
-        <aside class="report-side-rail report-side-rail--faq" aria-label="Support navigation and topic navigation">
+        <aside class="report-side-rail report-side-rail--faq" aria-label="Support navigation">
           <fdic-support-nav active="faq.html"></fdic-support-nav>
-          <section class="sidebar-container navigation" aria-label="Topic navigation">
-            <div id="category-tree" class="category-tree" role="listbox" aria-label="Filter by topic"></div>
-          </section>
         </aside>
 
         <section class="report-main" aria-labelledby="questions-heading">
           <div class="faq-controls" aria-label="FAQ Search and filters">
+            <h2 class="faq-filter-heading">Search and filter FAQs</h2>
             <label for="faq-search" class="visually-hidden">Search FAQs</label>
             <div class="search-input-wrap">
-              <input id="faq-search" type="search" placeholder="Search by keyword, topic, or phrase" autocomplete="off" />
+              <input id="faq-search" type="search" placeholder="Search questions and answers" autocomplete="off" />
               <button id="faq-search-inline-clear" class="faq-search-inline-clear" type="button" aria-label="Clear search text" hidden></button>
             </div>
-            <button id="clear-search" type="button" hidden>Clear</button>
-            <p id="result-count" aria-live="polite">Loading FAQs...</p>
+            <details id="topic-filter-panel" class="topic-filter-panel" open>
+              <summary>
+                <span class="topic-filter-panel__icon" aria-hidden="true">
+                  <svg viewBox="0 0 512 512" focusable="false">
+                    <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"></path>
+                  </svg>
+                </span>
+                <span>Filter by topic</span>
+              </summary>
+              <div id="popular-topic-list" class="popular-topic-list"></div>
+            </details>
+            <p id="faq-search-scope" class="faq-search-scope" hidden></p>
+            <div id="active-filter-summary" class="active-filter-summary" aria-live="polite" tabindex="-1" hidden></div>
+            <p id="result-summary" class="result-summary" aria-live="polite">Showing 285 FAQs.</p>
           </div>
           <section class="ds-region-middle" aria-labelledby="questions-heading">
             <h2 id="questions-heading">Questions and Answers</h2>
