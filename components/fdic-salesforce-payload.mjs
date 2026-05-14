@@ -43,6 +43,7 @@ export function buildSalesforcePayload(draft, options = {}) {
   const submittedAt = optionalString(options.submittedAt || draft?.submittedAt);
   const caseId = optionalString(options.caseId || draft?.caseId);
   const specificBank = cleanBankDetails(draft?.specificBankDetails);
+  const specificBankSearch = optionalString(draft?.specificBankSearch);
   const failedBankSearch = optionalString(draft?.failedBankSearch);
 
   return {
@@ -90,7 +91,8 @@ export function buildSalesforcePayload(draft, options = {}) {
     },
     institution: {
       selectedInstitution: specificBank,
-      selectedInstitutionAcknowledged: Boolean(draft?.specificBankAcknowledged || specificBank),
+      selectedInstitutionAcknowledged: Boolean(specificBank),
+      specificBankSearchText: specificBankSearch,
       failedBankSearchText: failedBankSearch,
     },
     consent: {

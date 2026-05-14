@@ -58,6 +58,7 @@ test("buildSalesforcePayload maps routing, requester, request, and selected inst
   assert.equal(payload.institution.selectedInstitution.certificateNumber, "35433");
   assert.equal(payload.institution.selectedInstitution.regulator, "FDIC");
   assert.equal(payload.institution.selectedInstitutionAcknowledged, true);
+  assert.equal(payload.institution.specificBankSearchText, "Ergo Bank");
   assert.equal(payload.consent.authorizationConfirmed, true);
   assert.equal(payload.prototype.localCaseId, "FDIC-20260430-1234");
 });
@@ -83,4 +84,17 @@ test("buildSalesforcePayload preserves failed-bank search and avoids direct data
   assert.equal(payload.processing.directDatabaseWrite, false);
   assert.match(payload.processing.expectedIntegration, /Salesforce APIs/);
   assert.match(payload.processing.expectedIntegration, /validation rules/);
+});
+
+test("buildSalesforcePayload keeps free-text bank search separate from a selected institution", () => {
+  const payload = buildSalesforcePayload({
+    ...baseDraft,
+    specificBankSearch: "Ergo",
+    specificBankDetails: null,
+    specificBankAcknowledged: true,
+  });
+
+  assert.equal(payload.institution.selectedInstitution, null);
+  assert.equal(payload.institution.selectedInstitutionAcknowledged, false);
+  assert.equal(payload.institution.specificBankSearchText, "Ergo");
 });

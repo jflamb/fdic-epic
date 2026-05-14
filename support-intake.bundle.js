@@ -1798,6 +1798,8 @@
         return Boolean(getSelectedTopic());
       case "failedBankBranch":
         return isBranchSelectionComplete();
+      case "specificBank":
+        return isSpecificBankStepComplete();
       default:
         return isSectionComplete(profile, stepKey);
     }
@@ -1926,6 +1928,9 @@
     });
   }
   function getStepHelperText(stepKey) {
+    if (stepKey === "specificBank" && hasUnresolvedSpecificBankQuery()) {
+      return "Select a BankFind match from the suggestions, or clear the bank search field to skip this optional step.";
+    }
     const config = FLOW_STEP_CONFIG[stepKey];
     return PROFILE_HELPER_BY_STEP[config == null ? void 0 : config.stepId] || "Complete this section to continue.";
   }
@@ -2246,17 +2251,21 @@
   }
   function isSectionProgressComplete(profile, sectionName) {
     if (sectionName === "specificBank") {
-      return Boolean(state.specificBankAcknowledged || hasSpecificBankSelection());
+      return Boolean(!hasUnresolvedSpecificBankQuery() && (state.specificBankAcknowledged || hasSelectedSpecificBankInstitution()));
     }
     if (sectionHasRequiredFields(profile, sectionName)) {
       return isSectionComplete(profile, sectionName);
     }
     return sectionHasUserInput(sectionName);
   }
-  function hasSpecificBankSelection() {
-    return Boolean(
-      state.specificBankDetails || (specificBankSelector == null ? void 0 : specificBankSelector.selectedBank) || state.specificBankSearch.trim() || sectionHasUserInput("specificBank")
-    );
+  function hasSelectedSpecificBankInstitution() {
+    return Boolean(state.specificBankDetails || (specificBankSelector == null ? void 0 : specificBankSelector.selectedBank));
+  }
+  function hasUnresolvedSpecificBankQuery() {
+    return Boolean(state.specificBankSearch.trim() && !hasSelectedSpecificBankInstitution());
+  }
+  function isSpecificBankStepComplete() {
+    return !hasUnresolvedSpecificBankQuery();
   }
   function isStepProgressComplete(stepKey, profile) {
     switch (stepKey) {
@@ -2390,7 +2399,7 @@
       case "failedBankSearch":
         return value ? null : { id: "failed-bank-search-input", label: "Enter the failed bank name or certificate number" };
       case "specificBankSearch":
-        return value ? null : { id: "specific-bank-search-input", label: "Select the bank this request is about" };
+        return hasUnresolvedSpecificBankQuery() ? { id: "specific-bank-search-input", label: "Select a BankFind match or clear the bank search field" } : null;
       case "firstName":
         return value ? null : { id: "first-name-input", label: "Enter your first name" };
       case "lastName":
@@ -2506,6 +2515,8 @@
         return state.topic ? [] : [{ id: "topic-group", label: "Select a concern topic" }];
       case "failedBankBranch":
         return isBranchSelectionComplete() ? [] : [{ id: "failed-branch-group", label: "Select the failed-bank request that best matches your need" }];
+      case "specificBank":
+        return hasUnresolvedSpecificBankQuery() ? [{ id: "specific-bank-search-input", label: "Select a BankFind match or clear the bank search field" }] : [];
       case "outcome":
         return profileIncludesSection(profile, "outcome") && !state.outcome ? [{ id: "outcome-group", label: "Select your desired outcome" }] : [];
       default: {
@@ -2791,9 +2802,7 @@
       }
     }
     state.specificBankDetails = (specificBankSelector == null ? void 0 : specificBankSelector.selectedBank) || null;
-    if (hasSpecificBankSelection()) {
-      state.specificBankAcknowledged = true;
-    }
+    state.specificBankAcknowledged = hasSelectedSpecificBankInstitution() || Boolean(state.specificBankAcknowledged && !state.specificBankSearch.trim());
     syncEmailSendBody();
     updateStepState();
     scheduleAutoSave();
@@ -2981,7 +2990,7 @@
       faqGateArmed = false;
       nextStepButton.textContent = "Continue";
       if (activeStep.key === "specificBank") {
-        state.specificBankAcknowledged = true;
+        state.specificBankAcknowledged = !hasUnresolvedSpecificBankQuery();
         scheduleAutoSave();
       }
       const nextStepKey = nextStepButton.dataset.nextStepKey || "";
