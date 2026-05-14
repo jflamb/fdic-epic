@@ -1,8 +1,20 @@
 import { escapeHtml } from "./utils.js";
 
+let choiceGroupInstanceCount = 0;
+
+function toIdToken(value, fallback = "choice-group") {
+  const token = String(value || "")
+    .trim()
+    .replace(/[^A-Za-z0-9_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return token || fallback;
+}
+
 export class FDICChoiceGroup extends HTMLElement {
   constructor() {
     super();
+    choiceGroupInstanceCount += 1;
+    this.instanceId = `choice-group-${choiceGroupInstanceCount}`;
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -101,13 +113,20 @@ export class FDICChoiceGroup extends HTMLElement {
       return;
     }
 
-    const legendRequired = this.config.required ? '&nbsp;<span class="report-required-marker" aria-hidden="true">*</span>' : "";
-    const safeName = escapeHtml(this.config.name || "");
+    const legendRequired = this.config.required
+      ? '&nbsp;<span class="report-required-marker" aria-hidden="true">*</span><span class="visually-hidden"> required</span>'
+      : "";
+    const rawName = this.config.name || "";
+    const safeName = escapeHtml(rawName);
+    const idPrefix = `${toIdToken(this.id || rawName)}-${this.instanceId}`;
+    const legendId = `${idPrefix}-legend`;
+    const helpId = `${idPrefix}-help`;
+    const describedBy = this.config.help ? ` aria-describedby="${escapeHtml(helpId)}"` : "";
 
     const radios = this.config.options
       .map((option, index) => {
         const checked = option.value === this.selectedValue;
-        const id = `${safeName}-${index}`;
+        const id = `${idPrefix}-${index}`;
         const selectedClass = checked ? " is-selected" : "";
         const safeTitle = escapeHtml(option.title || "");
         const safeValue = escapeHtml(option.value || "");
@@ -125,9 +144,9 @@ export class FDICChoiceGroup extends HTMLElement {
       .join("");
 
     // config.legend and config.help are trusted caller-provided HTML (may contain markup like required markers).
-    this.innerHTML = `<fieldset class="report-fieldset" data-group-name="${safeName}">
-        <legend id="${safeName}-legend">${this.config.legend}${legendRequired}</legend>
-        ${this.config.help ? `<p class="report-subcopy">${this.config.help}</p>` : ""}
+    this.innerHTML = `<fieldset class="report-fieldset" data-group-name="${safeName}"${describedBy}>
+        <legend id="${escapeHtml(legendId)}">${this.config.legend}${legendRequired}</legend>
+        ${this.config.help ? `<p id="${escapeHtml(helpId)}" class="report-subcopy">${this.config.help}</p>` : ""}
         <div class="report-grid">${radios}</div>
       </fieldset>`;
   }

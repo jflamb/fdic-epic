@@ -114,7 +114,7 @@
                 <div id="failed-bank-wrapper" class="report-section" hidden>
                   <fieldset class="report-fieldset">
                     <legend>Which failed bank is this about? <span id="failed-bank-identification-required-marker" class="report-required-marker" aria-hidden="true" hidden>*</span></legend>
-                    <p class="report-subcopy">Enter the failed bank name or FDIC certificate number so we can route your request to the correct receivership records or servicing team. Suggestions show banks that failed within the last five years, newest first.</p>
+                    <p id="failed-bank-search-help" class="report-subcopy">Enter the failed bank name or FDIC certificate number so we can route your request to the correct receivership records or servicing team. Suggestions show banks that failed within the last five years, newest first.</p>
                     <div class="report-inline-grid">
                       <div class="report-inline-grid__full">
                         <label class="report-label report-label--compact" for="failed-bank-search-input">Failed bank name or FDIC certificate number <span id="failed-bank-search-required-marker" class="report-required-marker" aria-hidden="true" hidden>*</span></label>
@@ -129,6 +129,7 @@
                               aria-expanded="false"
                               aria-controls="failed-bank-listbox"
                               aria-activedescendant=""
+                              aria-describedby="failed-bank-search-help"
                               placeholder="For example: First National Bank or certificate 12345"
                               data-fdic-input
                             />

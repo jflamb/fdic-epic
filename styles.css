@@ -1604,7 +1604,7 @@ button,
 
 /* Connector line drawn on complete and current-step items */
 .progress-item.is-complete::after,
-.progress-item[aria-current="step"]::after {
+.progress-item.is-current::after {
   content: "";
   position: absolute;
   left: calc(-1.1rem - 0.025rem);
@@ -1616,7 +1616,7 @@ button,
 }
 
 /* Don't extend the line below the current step */
-.progress-item[aria-current="step"]::after {
+.progress-item.is-current::after {
   bottom: auto;
   height: calc(0.15rem + 0.525rem);
 }
@@ -1652,15 +1652,15 @@ button,
 }
 
 
-.progress-item[aria-current="step"] {
+.progress-item.is-current {
   font-weight: 600;
 }
 
-.progress-item[aria-current="step"]::before {
+.progress-item.is-current::before {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%230c5a88" d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/></svg>');
 }
 
-.progress-item[aria-current="step"] .progress-label {
+.progress-item.is-current .progress-label {
   color: var(--fdic-blue-900);
 }
 

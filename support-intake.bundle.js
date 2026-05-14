@@ -2410,13 +2410,12 @@ function updateStepState() {
     }
     node.classList.toggle("is-complete", step.progressComplete);
     node.classList.toggle("is-incomplete", !step.progressComplete);
-    if (step.key === activeStepKey) {
-      node.setAttribute("aria-current", "step");
-    } else {
-      node.removeAttribute("aria-current");
-    }
-    node.setAttribute("aria-label", `${step.label}: ${step.progressComplete ? "Complete" : "Not started"}`);
-    node.innerHTML = `<a class="progress-link" href="#${step.targetId}"><span class="progress-label">${step.label}</span></a>`;
+    node.classList.toggle("is-current", step.key === activeStepKey);
+    node.removeAttribute("aria-current");
+    node.removeAttribute("aria-label");
+    const statusLabel = step.key === activeStepKey ? "Current step" : step.progressComplete ? "Complete" : "Not started";
+    const currentAttr = step.key === activeStepKey ? ' aria-current="step"' : "";
+    node.innerHTML = `<a class="progress-link" href="#${step.targetId}" aria-label="${escapeHtml(`${step.label}: ${statusLabel}`)}"${currentAttr}><span class="progress-label">${step.label}</span></a>`;
   }
 
   const progressMessage = `Progress updated. ${completeCount} of ${visibleSteps.length} visible sections complete.`;
