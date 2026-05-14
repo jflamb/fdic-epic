@@ -67,7 +67,7 @@
     "queueCode": "Q-DEP",
     "pattern": "intake",
     "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
-    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState"],
     "conditionalFields": {},
     "notes": "Subtype handling and failed-bank identification are added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
   },
@@ -76,16 +76,16 @@
     "queueCode": "Q-LIEN",
     "pattern": "intake",
     "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
-    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState"],
     "conditionalFields": {},
-    "notes": "The observed requestform lien-release family shares the seven-field failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+    "notes": "The observed requestform lien-release family shares the failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
   },
   "requestform-RecordsResearch": {
     "label": "Failed Bank Records Research Team",
     "queueCode": "Q-RR",
     "pattern": "intake",
     "sections": ["documentRequestType", "failedBankIdentification", "narrative", "identity", "mailingAddress"],
-    "requiredFields": ["documentRequestType", "failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "requiredFields": ["documentRequestType", "failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState"],
     "conditionalFields": {},
     "notes": "Document-request details and failed-bank identification are added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
   },
@@ -94,7 +94,7 @@
     "queueCode": "Q-AM",
     "pattern": "intake",
     "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
-    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState"],
     "conditionalFields": {},
     "notes": "Failed-bank identification and asset-specific subtype routing are added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
   },
@@ -103,18 +103,18 @@
     "queueCode": "Q-LPOA",
     "pattern": "intake",
     "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
-    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState"],
     "conditionalFields": {},
-    "notes": "The observed form shares the seven-field failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+    "notes": "The observed form shares the failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
   },
   "recordsdestructionform": {
     "label": "Failed Bank Records Custody Team",
     "queueCode": "Q-CUST",
     "pattern": "intake",
     "sections": ["failedBankIdentification", "narrative", "identity", "mailingAddress"],
-    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "businessPhone", "mailingStreet", "mailingCity", "mailingState"],
+    "requiredFields": ["failedBankSearch", "firstName", "lastName", "email", "emailConfirm", "mailingStreet", "mailingCity", "mailingState"],
     "conditionalFields": {},
-    "notes": "The observed form shares the seven-field failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
+    "notes": "The observed form shares the failed-bank baseline, with failed-bank identification added in P2. The prototype now treats failed-bank identification as required to support accurate routing."
   },
   "factsemailsend-taxUnit": {
     "label": "Tax Document Request",
