@@ -36,6 +36,7 @@
     "cheerio": "^1.2.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.60.0"
+    "@playwright/test": "^1.60.0",
+    "esbuild": "^0.28.0"
   }
 }
