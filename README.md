@@ -29,6 +29,21 @@ The build regenerates:
 npm test
 ```
 
+Run browser-level regression tests:
+
+```bash
+npx playwright install chromium
+npm run test:e2e
+```
+
+Run both unit and browser tests:
+
+```bash
+npm run test:all
+```
+
+The browser tests use Playwright and start the static prototype with `npm run start` at `http://localhost:4173/`.
+
 ## Publish
 
 The included GitHub Pages workflow publishes the repo root from `main`.
