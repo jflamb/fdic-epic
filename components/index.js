@@ -19,3 +19,4 @@ import "./fdic-bank-selector.js";
 // Pull non-component utilities into the shared __fdic_modules registry so
 // page-script bundles can resolve their imports without re-fetching them.
 import "./fdic-regulator-handoff.mjs";
+import "./prototype-storage.mjs";

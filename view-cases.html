@@ -71,12 +71,17 @@
           </section>
 
           <div id="cases-region" data-login-gov-cases-region hidden>
+            <section class="legal-note legal-note--compact legal-note--full report-section" aria-label="Prototype case history notice">
+              <p><strong>Prototype case history:</strong> This page uses browser-local metadata from this prototype, such as confirmation number, submitted date, request type, topic, outcome, routing queue, queue code, and status. It does not store your narrative, contact information, address, bank details, or payload here.</p>
+            </section>
+
             <div class="cases-controls">
               <label for="cases-sort">Sort by recency</label>
               <select id="cases-sort" class="report-select">
                 <option value="newest">Newest first</option>
                 <option value="oldest">Oldest first</option>
               </select>
+              <button type="button" id="clear-case-history-btn" class="confirm-print-btn" hidden>Clear case history from this browser</button>
             </div>
 
             <div id="cases-empty" class="report-error-summary" hidden>

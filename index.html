@@ -65,13 +65,17 @@
                 </div>
               </div>
               <span class="report-draft-bar__spacer"></span>
-              <button type="button" id="reset-form-btn" class="reset-form-btn" aria-expanded="false" aria-controls="reset-form-confirm">Reset form</button>
+              <button type="button" id="reset-form-btn" class="reset-form-btn" aria-expanded="false" aria-controls="reset-form-confirm" hidden>Clear saved draft</button>
               <span id="reset-form-confirm" class="reset-form-confirm" hidden>
-                <span class="reset-form-confirm__text">Clear your draft?</span>
-                <button type="button" id="reset-form-yes" class="reset-form-confirm__btn reset-form-confirm__btn--yes">Yes, reset</button>
+                <span class="reset-form-confirm__text">Clear this saved draft from this browser?</span>
+                <button type="button" id="reset-form-yes" class="reset-form-confirm__btn reset-form-confirm__btn--yes">Yes, clear</button>
                 <button type="button" id="reset-form-no" class="reset-form-confirm__btn reset-form-confirm__btn--no">Cancel</button>
               </span>
             </div>
+            <p class="prototype-storage-note">
+              This static prototype saves drafts only in this browser so you can continue the flow. It does not submit
+              your request to FDIC systems. <span id="draft-privacy-ttl">Saved drafts are cleared after a short time.</span>
+            </p>
           </div>
           <div class="report-content-grid report-content-grid--single">
             <div class="report-form-pane">

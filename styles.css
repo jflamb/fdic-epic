@@ -2287,7 +2287,19 @@ button,
   outline-offset: 3px;
 }
 
+.prototype-storage-note {
+  flex-basis: 100%;
+  margin: 0.15rem 0 0;
+  color: var(--fdic-gray-700);
+  font-size: var(--type-caption-size);
+  line-height: 1.45;
+}
+
 .confirm-print-row {
+  margin: 0 0 1rem;
+}
+
+.confirmation-clear-row {
   margin: 0 0 1rem;
 }
 
@@ -3659,6 +3671,7 @@ fdic-choice-group {
 .cases-controls {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.65rem;
   margin: 0 0 0.85rem;
 }
@@ -3671,6 +3684,10 @@ fdic-choice-group {
 .cases-controls .report-select {
   width: auto;
   min-width: 12rem;
+}
+
+.cases-controls .confirm-print-btn {
+  margin-left: auto;
 }
 
 #confirm-case {

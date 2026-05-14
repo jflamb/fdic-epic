@@ -1,8 +1,12 @@
+import { PROTOTYPE_SESSION_TTL_HOURS, isPrototypeSessionRecordFresh } from "./components/prototype-storage.mjs";
+
 const SUBMITTED_STORAGE_KEY = "fdicSupportSubmittedCase";
 
 const caseNode = document.getElementById("confirm-case");
 const submittedNode = document.getElementById("confirm-submitted");
 const summaryNode = document.getElementById("confirm-summary");
+const clearConfirmationBtn = document.getElementById("clear-confirmation-btn");
+const privacyTtlNote = document.getElementById("confirmation-privacy-ttl");
 
 const intentNode = document.getElementById("confirm-intent");
 const topicNode = document.getElementById("confirm-topic");
@@ -19,7 +23,13 @@ const endpointNode = document.getElementById("confirm-endpoint");
 function loadSubmitted() {
   try {
     const raw = sessionStorage.getItem(SUBMITTED_STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
+    if (!raw) return null;
+    const submitted = JSON.parse(raw);
+    if (!isPrototypeSessionRecordFresh(submitted)) {
+      sessionStorage.removeItem(SUBMITTED_STORAGE_KEY);
+      return null;
+    }
+    return submitted;
   } catch {
     return null;
   }
@@ -29,6 +39,9 @@ function renderMissing() {
   caseNode.textContent = "No recent submission was found in this session.";
   submittedNode.textContent = "Please return to the form and submit a request.";
   summaryNode.hidden = true;
+  if (clearConfirmationBtn instanceof HTMLElement) {
+    clearConfirmationBtn.hidden = true;
+  }
 }
 
 function renderSubmitted(data) {
@@ -47,6 +60,9 @@ function renderSubmitted(data) {
   endpointNode.textContent = data.endpointLabel || "Not provided";
 
   summaryNode.hidden = false;
+  if (clearConfirmationBtn instanceof HTMLElement) {
+    clearConfirmationBtn.hidden = false;
+  }
 }
 
 function showConditionalRow(dtEl, ddEl, value) {
@@ -94,6 +110,10 @@ function updateBreadcrumb(data) {
 }
 
 const submitted = loadSubmitted();
+if (privacyTtlNote instanceof HTMLElement) {
+  privacyTtlNote.textContent = `Saved confirmation details are cleared after about ${PROTOTYPE_SESSION_TTL_HOURS} hours.`;
+}
+
 if (!submitted || !submitted.caseId) {
   renderMissing();
 } else {
@@ -108,5 +128,12 @@ if (printBtn) {
   printBtn.addEventListener("click", () => {
     document.body.setAttribute("data-print-stamp", new Date().toLocaleString());
     window.print();
+  });
+}
+
+if (clearConfirmationBtn) {
+  clearConfirmationBtn.addEventListener("click", () => {
+    sessionStorage.removeItem(SUBMITTED_STORAGE_KEY);
+    renderMissing();
   });
 }

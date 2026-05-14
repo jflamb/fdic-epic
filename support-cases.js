@@ -1,3 +1,4 @@
+import { sanitizeCaseHistory } from "./components/prototype-storage.mjs";
 import { escapeHtml } from "./components/utils.js";
 
 const CASE_HISTORY_STORAGE_KEY = "fdicSupportCaseHistory";
@@ -6,12 +7,19 @@ const table = document.getElementById("cases-table");
 const tbody = document.getElementById("cases-tbody");
 const empty = document.getElementById("cases-empty");
 const sortSelect = document.getElementById("cases-sort");
+const clearCaseHistoryBtn = document.getElementById("clear-case-history-btn");
+
+let cases = [];
 
 function loadCases() {
   try {
     const raw = localStorage.getItem(CASE_HISTORY_STORAGE_KEY);
     const parsed = raw ? JSON.parse(raw) : [];
-    return Array.isArray(parsed) ? parsed : [];
+    const history = sanitizeCaseHistory(parsed);
+    if (raw !== JSON.stringify(history)) {
+      localStorage.setItem(CASE_HISTORY_STORAGE_KEY, JSON.stringify(history));
+    }
+    return history;
   } catch {
     return [];
   }
@@ -31,6 +39,9 @@ function renderCases(cases, sortValue = "newest") {
   if (!cases.length) {
     empty.hidden = false;
     table.hidden = true;
+    if (clearCaseHistoryBtn instanceof HTMLElement) {
+      clearCaseHistoryBtn.hidden = true;
+    }
     if (sortSelect) {
       sortSelect.disabled = true;
     }
@@ -53,17 +64,28 @@ function renderCases(cases, sortValue = "newest") {
   tbody.innerHTML = rows;
   empty.hidden = true;
   table.hidden = false;
+  if (clearCaseHistoryBtn instanceof HTMLElement) {
+    clearCaseHistoryBtn.hidden = false;
+  }
   if (sortSelect) {
     sortSelect.disabled = false;
   }
 }
 
-const cases = loadCases();
+cases = loadCases();
 const initialSort = sortSelect?.value || "newest";
 renderCases(cases, initialSort);
 
 if (sortSelect) {
   sortSelect.addEventListener("change", () => {
     renderCases(cases, sortSelect.value);
+  });
+}
+
+if (clearCaseHistoryBtn) {
+  clearCaseHistoryBtn.addEventListener("click", () => {
+    localStorage.removeItem(CASE_HISTORY_STORAGE_KEY);
+    cases = [];
+    renderCases(cases, sortSelect?.value || "newest");
   });
 }

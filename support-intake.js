@@ -1,5 +1,6 @@
 import { stripQuestionPrefix } from "./components/utils.js";
 import { getRegulatorHandoffProfile as getRegulatorHandoffProfileForBank } from "./components/fdic-regulator-handoff.mjs";
+import { PROTOTYPE_SESSION_TTL_HOURS, isPrototypeSessionRecordFresh } from "./components/prototype-storage.mjs";
 import "./components/fdic-choice-group.js";
 import {
   OUTCOME_OPTIONS,
@@ -2362,9 +2363,11 @@ function saveLiveDraft() {
     const draft = buildLiveDraft();
     if (!hasLiveDraftContent(draft)) {
       sessionStorage.removeItem(LIVE_DRAFT_KEY);
+      updateDraftClearControl(false);
       return;
     }
     sessionStorage.setItem(LIVE_DRAFT_KEY, JSON.stringify(draft));
+    updateDraftClearControl(true);
     flashDraftSavedIndicator();
   } catch {
     /* sessionStorage may be full or unavailable — ignore silently */
@@ -2391,10 +2394,34 @@ function clearLiveDraft() {
   sessionStorage.removeItem(LIVE_DRAFT_KEY);
   const badge = document.getElementById("draft-saved-badge");
   if (badge) badge.hidden = true;
+  updateDraftClearControl(hasStoredDraft());
 }
 
 function clearReviewDraft() {
   sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+  updateDraftClearControl(hasStoredDraft());
+}
+
+function clearSavedDrafts() {
+  sessionStorage.removeItem(LIVE_DRAFT_KEY);
+  sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+  updateDraftClearControl(false);
+}
+
+function hasStoredDraft() {
+  return Boolean(sessionStorage.getItem(LIVE_DRAFT_KEY) || sessionStorage.getItem(DRAFT_STORAGE_KEY));
+}
+
+function updateDraftClearControl(hasDraft = hasStoredDraft()) {
+  const resetBtn = document.getElementById("reset-form-btn");
+  const resetConfirm = document.getElementById("reset-form-confirm");
+  if (resetBtn instanceof HTMLElement) {
+    resetBtn.hidden = !hasDraft;
+    resetBtn.setAttribute("aria-expanded", "false");
+  }
+  if (resetConfirm instanceof HTMLElement) {
+    resetConfirm.hidden = true;
+  }
 }
 
 function formatRelativeTime(timestamp) {
@@ -2433,10 +2460,7 @@ function showDraftRestoredBanner(savedAt) {
 function hideDraftRestoredBanner() {
   const banner = document.getElementById("draft-restored-banner");
   if (banner instanceof HTMLElement) banner.hidden = true;
-  const resetBtn = document.getElementById("reset-form-btn");
-  if (resetBtn instanceof HTMLElement) {
-    resetBtn.hidden = false;
-  }
+  updateDraftClearControl();
 }
 
 function loadLiveDraft() {
@@ -2444,6 +2468,12 @@ function loadLiveDraft() {
     const raw = sessionStorage.getItem(LIVE_DRAFT_KEY);
     if (!raw) return null;
     const draft = JSON.parse(raw);
+    // Prototype continuity data is useful for a short work session, not long-term retention.
+    if (!isPrototypeSessionRecordFresh(draft)) {
+      sessionStorage.removeItem(LIVE_DRAFT_KEY);
+      updateDraftClearControl(hasStoredDraft());
+      return null;
+    }
     return hasLiveDraftContent(draft) ? draft : null;
   } catch {
     return null;
@@ -2455,6 +2485,11 @@ function loadReviewDraftForEditing() {
     const raw = sessionStorage.getItem(DRAFT_STORAGE_KEY);
     if (!raw) return null;
     const draft = JSON.parse(raw);
+    if (!isPrototypeSessionRecordFresh(draft)) {
+      sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+      updateDraftClearControl(hasStoredDraft());
+      return null;
+    }
     if (!hasLiveDraftContent(draft)) return null;
     if (initialMode && draft.intent !== initialMode) return null;
     return draft;
@@ -3080,12 +3115,16 @@ window.addEventListener("pagehide", () => {
 });
 
 async function resetForm() {
-  clearLiveDraft();
-  clearReviewDraft();
+  clearSavedDrafts();
   window.location.replace(window.location.pathname);
 }
 
 async function init() {
+  const privacyTtlNote = document.getElementById("draft-privacy-ttl");
+  if (privacyTtlNote instanceof HTMLElement) {
+    privacyTtlNote.textContent = `Saved drafts are cleared after about ${PROTOTYPE_SESSION_TTL_HOURS} hours.`;
+  }
+  updateDraftClearControl();
   renderIntentGroup();
   populateDeferredSelectOptions();
 

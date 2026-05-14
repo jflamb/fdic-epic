@@ -43,9 +43,15 @@
         <section class="report-main">
           <p id="confirm-case" role="status" aria-live="polite"></p>
           <p id="confirm-submitted" class="report-subcopy"></p>
+          <section class="legal-note legal-note--compact legal-note--full report-section" aria-label="Prototype storage notice">
+            <p><strong>Prototype storage:</strong> This confirmation is saved only in this browser for prototype continuity. The prototype does not submit your request to FDIC systems. <span id="confirmation-privacy-ttl">Saved confirmation details are cleared after a short time.</span></p>
+          </section>
 
           <p class="confirm-print-row">
             <button type="button" id="print-confirmation-btn" class="confirm-print-btn">Print or save as PDF</button>
+          </p>
+          <p class="confirmation-clear-row">
+            <button type="button" id="clear-confirmation-btn" class="confirm-print-btn">Clear this confirmation from this browser</button>
           </p>
 
           <fdic-review-summary dl-id="confirm-summary" id-prefix="confirm" endpoint-label="Assigned routing queue"></fdic-review-summary>

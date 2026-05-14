@@ -1,5 +1,6 @@
 import { ROUTES } from "./components/routes.js";
 import { buildSalesforcePayload } from "./components/fdic-salesforce-payload.mjs";
+import { createCaseHistoryEntry, isPrototypeSessionRecordFresh, sanitizeCaseHistory } from "./components/prototype-storage.mjs";
 import { escapeHtml, stripQuestionPrefix } from "./components/utils.js";
 
 const DRAFT_STORAGE_KEY = "fdicSupportIntakeDraft";
@@ -206,7 +207,13 @@ function hasContextTopicMatch(article, contextLabels) {
 function loadDraft() {
   try {
     const raw = sessionStorage.getItem(DRAFT_STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
+    if (!raw) return null;
+    const draft = JSON.parse(raw);
+    if (!isPrototypeSessionRecordFresh(draft)) {
+      sessionStorage.removeItem(DRAFT_STORAGE_KEY);
+      return null;
+    }
+    return draft;
   } catch {
     return null;
   }
@@ -483,17 +490,8 @@ submitButton.addEventListener("click", () => {
   sessionStorage.setItem(SUBMITTED_STORAGE_KEY, JSON.stringify(submittedCase));
   try {
     const existing = JSON.parse(localStorage.getItem(CASE_HISTORY_STORAGE_KEY) || "[]");
-    const history = Array.isArray(existing) ? existing : [];
-    history.push({
-      caseId: submittedCase.caseId,
-      submittedAt: submittedCase.submittedAt,
-      workflowHeading: submittedCase.workflowHeading,
-      topicTitle: submittedCase.topicTitle,
-      outcomeTitle: submittedCase.outcomeTitle,
-      endpointLabel: submittedCase.endpointLabel,
-      queueCode: submittedCase.queueCode,
-      status: submittedCase.status,
-    });
+    const history = sanitizeCaseHistory(existing);
+    history.push(createCaseHistoryEntry(submittedCase));
     localStorage.setItem(CASE_HISTORY_STORAGE_KEY, JSON.stringify(history));
   } catch {
     // Ignore localStorage failures in prototype mode.
