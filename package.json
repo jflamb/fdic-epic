@@ -10,8 +10,10 @@
     "build:faq-index": "node scripts/build-fdic-epic-faq-index.mjs",
     "build:faq-jsonld": "node scripts/build-fdic-epic-faq-jsonld.mjs",
     "build:popular-banks": "node scripts/build-fdic-epic-popular-banks.mjs",
+    "audit:config": "node scripts/audit-routing-config.mjs",
+    "check:generated": "node scripts/check-generated-assets.mjs",
     "start": "python3 -m http.server 4173",
-    "test": "node --test",
+    "test": "node --test && npm run audit:config",
     "test:e2e": "playwright test",
     "test:all": "npm test && npm run test:e2e"
   },

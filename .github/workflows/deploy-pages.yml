@@ -44,6 +44,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Check generated assets
+        run: npm run check:generated
+
       - name: Prepare Pages artifact
         run: |
           mkdir _site
